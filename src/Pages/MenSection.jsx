@@ -15,5 +15,4 @@ function MenSection() {
     </>
   )
 }
-
 export default MenSection
