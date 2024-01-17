@@ -25,7 +25,7 @@ function Navbar() {
     }, [focused, inputRef]);
     return (
         <>
-            <div className="sticky w-full h-[6em] top-0 z-50 bg-white" style={{}}>
+            <div className="sticky w-full h-[5em] top-0 z-50 bg-white" style={{}}>
                 <div className="flex justify-between m-auto container items-center shadow-xl h-full rounded-t-[15px] rounded-b-[15px]" style={{}}>
                     {
                         focused ? (
@@ -49,11 +49,11 @@ function Navbar() {
                             (
                                 <>
                                     <div>
-                                        <Link to="/" className='text-orange-300 font-bold text-2xl hover:text-orange-400'>
+                                        <Link to="/" className='text-orange-300 font-bold text-xl hover:text-orange-400'>
                                             VogueVibesIndia
                                         </Link>
                                     </div>
-                                    <div className="hidden lg:flex text-xl items-center gap-10  bg-orange-300 rounded-full px-10 py-3.5">
+                                    <div className="hidden lg:flex text-xl items-center gap-10 bg-orange-300 rounded-full px-10 py-2.5">
                                         <Link to="/MenSection" >Men</Link>
                                         <Link to="/WomenSection">Women</Link>
                                         <Link to="/KidSection">Kids</Link>
@@ -61,25 +61,25 @@ function Navbar() {
                                     </div>
                                     <div className="flex bg-orange-300 rounded-full" >
                                         <div className="flex items-center">
-                                            <div className="flex rounded-full items-center gap-2 px-0.5 pe-2 transition duration-150 max-w-[300px]">
-                                                <button title='Search' className='hover:bg-orange-600 py-3.5 px-3.5 rounded-full ' >
+                                            <div className="flex rounded-full items-center gap-2 px-0.5 pe-1 transition duration-150 max-w-[300px]">
+                                                <button title='Search' className='hover:bg-orange-600 py-2.5 px-3.5 rounded-full ' >
                                                     <FaMagnifyingGlass size={21} />
                                                 </button>
-                                                <div className="py-2 rounded-full transition bg-orange-300 duration-150 flex items-center ">
+                                                <div className="py-2.5 rounded-full transition bg-orange-300 duration-150 flex items-center ">
                                                     <input
                                                         type="search"
                                                         placeholder="Search"
-                                                        className="bg-orange-300 focus:outline-none py-1.5 block md:hidden max-w-[190px]"
+                                                        className="bg-orange-300 focus:outline-none py-1 block md:hidden max-w-[190px]"
                                                         onChange={(e) => handleFocus(e)}
                                                     />
                                                     <input
                                                         type="search"
                                                         placeholder="Search by Category"
-                                                        className="bg-orange-300 focus:outline-none py-1.5 hidden md:block"
+                                                        className="bg-orange-300 focus:outline-none py-0.5 hidden md:block"
                                                         onChange={(e) => handleFocus(e)}
                                                     />
                                                 </div>
-                                                <div className="px-4 py-3.5 rounded-full hover:bg-orange-600 transition duration-150 max-w-[190px]">
+                                                <div className="px-4 py-.5 rounded-full hover:bg-orange-600 transition duration-150 max-w-[190px]">
                                                     <button title='Favourites'>
                                                         <FaRegHeart size={22} />
                                                     </button>

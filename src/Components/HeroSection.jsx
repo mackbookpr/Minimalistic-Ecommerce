@@ -1,10 +1,7 @@
 import React from 'react';
 import { FaAngleLeft } from "react-icons/fa6";
 import { FaAngleRight } from "react-icons/fa6";
-import MANQ from "../assets/Men/MANQ/MANQ.webp";
 import { Link } from 'react-router-dom';
-import FortWorth from "../assets/Men/FortWorth/FortWorth.webp";
-import Gown from "../assets/Women/Gown/RayonGown.webp";
 import { useState } from 'react';
 import Background from "../assets/Background/Background.webp";
 
