@@ -1,8 +1,13 @@
 {
+    "categories": [
+        "Kurta",
+        "Dhoti",
+        "Lungi"
+    ],
     "products": [
         {
             "id": 1,
-            "imgsrc": "../assets/Men/Dhoti/Dhoti1.webp",
+            "image": "../assets/Men/Dhoti/Dhoti1.webp",
             "name": "Prakasam Dhoti",
             "category": "Dhoti",
             "price": "500",
@@ -10,7 +15,7 @@
         },
         {
             "id": 2,
-            "imgsrc": "../assets/Men/FortWorth/FortWorth.webp",
+            "image": "../assets/Men/FortWorth/FortWorth.webp",
             "name": "Cotton Kurta",
             "category": "Kurta",
             "price": 1300,
@@ -18,7 +23,7 @@
         },
         {
             "id": 3,
-            "imgsrc": "../assets/Men/Lungi/Lungi.webp",
+            "image": "../assets/Men/Lungi/Lungi.webp",
             "name": "Prakasam Lungi",
             "category": "Lungi",
             "price": 400,

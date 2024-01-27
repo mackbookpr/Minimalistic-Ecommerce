@@ -1,25 +1,26 @@
+import { FETCH_PRODUCTS, FILTER_PRODUCTS } from '../Actions/ProductFilters';
+
 const initialState = {
-    data: [],
-    isLoading: false,
-    error: null,
+  products: [],
+  filteredProducts: [],
+  selectedCategory: null,
 };
 
-export default function dataReducer(state = initialState, action) {
-    switch (action.type) {
-        case 'FETCH_DATA_SUCCESS':
-            return {
-                ...state,
-                data: action.payload,
-                isLoading: false,
-                error: null,
-            };
-        case 'FETCH_DATA_FAILURE':
-            return {
-                ...state,
-                isLoading: false,
-                error: action.payload,
-            };
-        default:
-            return state;
-    }
-}
+const productReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case FETCH_PRODUCTS:
+      const { products } = action.payload;
+      return { ...state, products };
+    case FILTER_PRODUCTS:
+      const { category } = action.payload;
+      return {
+        ...state,
+        selectedCategory: category,
+        filteredProducts: state.products.filter((product) => !category || product.category === category),
+      };
+    default:
+      return state;
+  }
+};
+
+export default productReducer;

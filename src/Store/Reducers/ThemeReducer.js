@@ -4,7 +4,6 @@ const themeReducer = (state = initialState, action) => {
   console.log('Reducer:', action.type, state);
   switch (action.type) {
     case 'TOGGLE_DARK_MODE':
-      // console.log("Madhav");
     return { ...state, isDarkMode: !state.isDarkMode };
     default:
       return state;

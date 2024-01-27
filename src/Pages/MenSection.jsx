@@ -6,9 +6,17 @@ import Dhoti1 from "../assets/Men/Dhoti/Dhoti1.webp"
 import Lungi from "../assets/Men/Lungi/Lungi.webp"
 import Filter from '../Components/Filter';
 import { useSelector } from 'react-redux';
+import { fetchProducts } from '../Store/Actions/ProductFilters';
+import { useDispatch } from 'react-redux';
 
 function MenSection() {
-  const isDarkMode = useSelector(state => state.theme.isDarkMode);
+  const isDarkMode = useSelector(state => state.theme.isDarkMode); // Remove this line if the theme slice is not used
+  const filteredProducts = useSelector((state) => state.filteredProducts);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, [dispatch]);
   return (
     <>
       <div className="max-w-[1230px] px-5 py-5 m-auto flex justify-between">
@@ -21,7 +29,7 @@ function MenSection() {
       <div className="flex max-w-[1230px] m-auto gap-24">
         <Filter />
         <div className="grid max-w-[1030px] grid-cols-4 gap-5">
-          <div className="flex flex-col gap-2">
+          {/* <div className="flex flex-col gap-2">
             <div className="relative py-[2.6em]" id="kurta1" style={{ backgroundColor: isDarkMode ? 'white' : '' }}>
               <img src={FortWorth} alt="FortWorth Kurta" className='w-full object-cover' />
               <div className="overlay"></div>
@@ -50,57 +58,21 @@ function MenSection() {
               <h1 className='text-lg'>Men's Fortworth Kurta</h1>
               <h1>MRP: &#8377; 1395</h1>
             </div>
-          </div>
-          {/* <div className="flex flex-col gap-2">
-            <div className="kurta relative py-5">
-              <img src={FortWorth} alt="FortWorth Kurta" className='w-full' />
-              <div className="overlay"></div>
-            </div>
-            <div className="px-2 py-2">
-              <h1 className='text-lg'>Men's Fortworth Kurta</h1>
-              <h1>MRP: &#8377; 1395</h1>
-            </div>
-          </div>
-          <div className="flex flex-col gap-2">
-            <div className="kurta relative py-5">
-              <img src={FortWorth} alt="FortWorth Kurta" className='w-full object-cover' />
-              <div className="overlay"></div>
-            </div>
-            <div className="px-2 py-2">
-              <h1 className='text-lg'>Men's Fortworth Kurta</h1>
-              <h1>MRP: &#8377; 1395</h1>
-            </div>
-          </div>
-          <div className="flex flex-col gap-2">
-            <div className="kurta relative py-5">
-              <img src={FortWorth} alt="FortWorth Kurta" className='w-full' />
-              <div className="overlay"></div>
-            </div>
-            <div className="px-2 py-2">
-              <h1 className='text-lg'>Men's Fortworth Kurta</h1>
-              <h1>MRP: &#8377; 1395</h1>
-            </div>
-          </div>
-          <div className="flex flex-col gap-2">
-            <div className="kurta relative py-5">
-              <img src={FortWorth} alt="FortWorth Kurta" className='w-full object-cover' />
-              <div className="overlay"></div>
-            </div>
-            <div className="px-2 py-2">
-              <h1 className='text-lg'>Men's Fortworth Kurta</h1>
-              <h1>MRP: &#8377; 1395</h1>
-            </div>
-          </div>
-          <div className="flex flex-col gap-2">
-            <div className="kurta relative py-5">
-              <img src={FortWorth} alt="FortWorth Kurta" className='w-full' />
-              <div className="overlay"></div>
-            </div>
-            <div className="px-2 py-2">
-              <h1 className='text-lg'>Men's Fortworth Kurta</h1>
-              <h1>MRP: &#8377; 1395</h1>
-            </div>
           </div> */}
+          <div className="grid max-w-[1030px] grid-cols-4 gap-5">
+            {filteredProducts.map((product) => (
+              <div className="flex flex-col gap-2" key={product.id}>
+                <div className="relative py-[2.6em]" style={{ backgroundColor: isDarkMode ? 'white' : '' }}>
+                  <img src={product.image} alt={product.name} className='w-full object-cover' />
+                  <div className="overlay"></div>
+                </div>
+                <div className="px-2 py-2">
+                  <h1 className='text-lg'>{product.name}</h1>
+                  <h1>MRP: &#8377; {product.price}</h1>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </>
