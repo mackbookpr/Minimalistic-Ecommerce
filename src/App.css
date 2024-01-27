@@ -5,12 +5,6 @@
     font-family: 'Segoe UI', sans-serif;
 }
 
-.container {
-    max-width: 1230px;
-    padding-inline: 1.25em;
-    padding-block: 1.25em;
-}
-
 input[type="search"]::placeholder {
     color: black !important;
     font-weight: 400;
