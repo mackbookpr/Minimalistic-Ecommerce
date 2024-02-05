@@ -1,13 +1,13 @@
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import { useSelector } from 'react-redux';
-import { LightTheme, DarkTheme } from './Styles/Theme';
+import { LightTheme, darkTheme } from './Styles/DarkTheme';
 
 const ThemeWrapper = ({ children }) => {
   const isDarkMode = useSelector(state => state.theme.isDarkMode);
 
   return (
-    <ThemeProvider theme={isDarkMode ? DarkTheme : LightTheme}>
+    <ThemeProvider theme={isDarkMode ? darkTheme : LightTheme}>
       {children}
     </ThemeProvider>
   );

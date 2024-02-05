@@ -1,13 +1,9 @@
-import { configureStore } from '@reduxjs/toolkit';
-import themeReducer from './Reducers/ThemeReducer';
-import ProductsReducer from './Reducers/ProductsReducer';
+import { configureStore } from "@reduxjs/toolkit";
+import DarkModeReducer from "../Reducers/DarkModeReducer";
 
 const store = configureStore({
-  reducer: {
-    theme: themeReducer,
-    filter:ProductsReducer
-  },
+    reducer: {
+        theme: DarkModeReducer
+    }
 });
-
-// Export the store if needed in other files:
 export default store;

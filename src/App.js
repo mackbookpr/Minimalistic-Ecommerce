@@ -1,27 +1,25 @@
 import './App.css';
 import './index.css'
-import Navbar from './Components/Navbar';
+import Navbar from './Components/Navbar.jsx'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import HomePage from './Pages/HomePage';
-import KidSection from './Pages/KidSection';
-import WomenSection from './Pages/WomenSection';
-import MenSection from './Pages/MenSection';
-import GlobalStyles from './Styles/Global';
+import MenPage from './Pages/MenPage.jsx';
+import HeroSection from './Components/HeroSection.jsx';
+import WomenSection from './Pages/WomenPage.jsx';
+import Global from './Styles/Global.js'
+// import KidSection from './Pages/KidsPage.jsx'
 
 function App() {
   return (
     <BrowserRouter>
-      <GlobalStyles />
+      <Global />
       <Navbar />
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/MenSection" element={<MenSection />} />
+        <Route path="/" element={<HeroSection />} />
+        <Route path="/MenPage" element={<MenPage />} />
         <Route path="/WomenSection" element={<WomenSection />} />
-        <Route path="/KidSection" element={<KidSection />} />
-        {/* <Route path="/LatestArrivals" element={<LatestArrivals />}/> */}
+        {/* <Route path="/KidSection" element={<KidSection />} /> */}
       </Routes>
     </BrowserRouter>
-
   );
 }
 
