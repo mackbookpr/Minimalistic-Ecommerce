@@ -1,3 +1,5 @@
+The Main motivation behind this project for me was Amazon -> I never had a very smooth experience with the UI of amazon, so i wanted to see that whether it was possible to create a smoother UI experience for an ecommerce website.So I decided to go with an ecommerce website which provides smoother UI experience.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -69,3 +71,5 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 # Ecommerce
+
+
