@@ -1,0 +1,66 @@
+[
+    {
+        "id": 1,
+        "name": "ShadowTech PC",
+        "category": "Electronics",
+        "imgName": "BlackComputer",
+        "price": "10000",
+        "color": "Black"
+    },
+    {
+        "id": 2,
+        "name": "Arctic Chill",
+        "category": "Electronics",
+        "imgName": "BlueRefrigerator",
+        "price": "19000",
+        "color": "Blue"
+    },
+    {
+        "id": 3,
+        "name": "SunnyWatch Security",
+        "category": "Electronics",
+        "imgName": "OrangeCCTVs",
+        "price": "1000",
+        "color": "Orange"
+    },
+    {
+        "id": 4,
+        "name": "PurePulse Defibrillator",
+        "category": "Electronics",
+        "imgName": "WhiteDefibrillator",
+        "price": "6000",
+        "color": "White"
+    },
+    {
+        "id": 5,
+        "name": "Midnight Miracle",
+        "category": "Skincare",
+        "imgName": "BlackSkinCare",
+        "price": "400",
+        "color": "Black"
+    },
+    {
+        "id": 6,
+        "name": "Blue Aura",
+        "category": "Skincare",
+        "imgName": "BlueSkinCare",
+        "price": "1000",
+        "color": "Blue"
+    },
+    {
+        "id": 7,
+        "name": "Sunset Glow",
+        "category": "Skincare",
+        "imgName": "OrangeSkinCare",
+        "price": "1000",
+        "color": "Orange"
+    },
+    {
+        "id": 8,
+        "name": "Crisp Glow",
+        "category": "Skincare",
+        "imgName": "WhiteSkinCare",
+        "price": "500",
+        "color": "White"
+    }
+]

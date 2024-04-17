@@ -1,25 +1,32 @@
 import './App.css';
-import './index.css'
-import Navbar from './Components/Navbar.jsx'
+import './index.css';
+import Navbar from './Components/Navbar.jsx';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import MenPage from './Pages/MenPage.jsx';
-import HeroSection from './Components/HeroSection.jsx';
-import WomenSection from './Pages/WomenPage.jsx';
-import Global from './Styles/Global.js'
-// import KidSection from './Pages/KidsPage.jsx'
+import DefaultPage from './Pages/DefaultPage.jsx';
+import DefaultElectronics from './Pages/Electronics/DefaultElectronics.jsx';
+import DefaultSkinCare from './Pages/SkinCare/DefaultSkinCare.jsx';
+import DefaultFurniture from './Pages/Furniture/DefaultFurniture.jsx';
+import DefaultKitchen from './Pages/Kitchen/DefaultKitchen.jsx';
+import DefaultProductPageElectronics from './Pages/Electronics/DefaultProductPageElectronics.jsx';
+import DefaultProductPageSkinCare from './Pages/SkinCare/DefaultProductPageSkinCare.jsx'
+import { CartProvider } from "./CartContext.js";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Global />
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<HeroSection />} />
-        <Route path="/MenPage" element={<MenPage />} />
-        <Route path="/WomenSection" element={<WomenSection />} />
-        {/* <Route path="/KidSection" element={<KidSection />} /> */}
-      </Routes>
-    </BrowserRouter>
+    <CartProvider>
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<DefaultPage />}></Route>
+          <Route path="/Electronics" element={<DefaultElectronics />}></Route>
+          <Route path="/Electronics/:productID" element={<DefaultProductPageElectronics />}></Route>
+          <Route path="/SkinCare" element={<DefaultSkinCare />} />
+          <Route path="/SkinCare/:productID" element={<DefaultProductPageSkinCare />}></Route>
+          <Route path="/Furniture" element={<DefaultFurniture />} />
+          <Route path="/Kitchen" element={<DefaultKitchen />} />
+        </Routes>
+      </BrowserRouter >
+    </CartProvider>
   );
 }
 
