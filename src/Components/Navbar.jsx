@@ -47,7 +47,7 @@ function Navbar() {
         }
     }
 
-    const texts = ['Furniture', 'Kitchen Items', 'Skincare Items', 'Electronic Products'];
+    const texts = ['Furniture Items', 'Kitchen Items', 'Skincare Items', 'Electronics Products'];
     const totalQuantity = cartItems.reduce((total, item) => total + item.Quantity, 0);
 
 
@@ -107,31 +107,42 @@ function Navbar() {
     const [hide, setHide] = useState(true);
     const [hamburger, setHamburger] = useState();
     const [isVisible, setIsVisible] = useState(false);
-    const [search, setSearch] = useState(false);
-    const [value, setValue] = useState("");
-    const [query, setQuery] = useState('');
-    const onInput = (e) => setValue(e.target.value);
+    const [searchInput, setSearchInput] = useState("");
+    const [filteredItems, setFilteredItems] = useState([]);
 
-    const onClear = () => {
-        setValue("");
-        setSearch(false);
+    const handleInputChange = (e) => {
+        const inputValue = e.target.value;
+        setSearchInput(inputValue);
+        if (!inputValue) setFilteredItems([]);
+
+        const firstCharFilteredItems = texts.filter(item => {
+            return item.charAt(0).toLowerCase() === inputValue.charAt(0).toLowerCase();
+        });
+
+        if (firstCharFilteredItems.length === 0) return [];
+
+        const FilteredItems = firstCharFilteredItems.filter(item => {
+            return item.toLowerCase().includes(inputValue.toLowerCase());
+        });
+        setFilteredItems(FilteredItems);
     };
-
-    const handleSearchInputChange = (e) => {
-        setSearch(true);
-        setQuery(e.target.value);
-    }
-
     return (
         <section className='sticky w-full top-0 z-50'>
-            <section className='xl:max-w-[1265px] lg:max-w-[1035px] md:max-w-[830px] m-auto shadow-lg py-3 flex items-center justify-between h-[70px] gap-10 px-10 bg-white relative'>
+            <section className='xl:max-w-[1265px] lg:max-w-[1035px] m-auto shadow-lg py-3 flex items-center justify-between h-[70px] gap-10 px-10 bg-white relative'>
                 <h1 className={`text-xl text-orange-400 font-bold`}><Link to="/">Minimalistic Ecommerce</Link></h1>
                 <div className='flex gap-24 justify-between text-orange-400 items-center'>
                     <div className={`flex items-center justify-end gap-2 md:gap-5`}>
-                        <div className={`text-md gap-3 flex items-center rounded-xl bg-orange-200 py-1 md:px-2 px-1 w-[17em]`}>
-                            <button><FaSearch size="17" color='black' onClick={() => setSearch(true)} /></button>
-                            <input type="search" name="Search" value={value} onInput={onInput} placeholder={'Search for ' + (typedText + '|')} autoComplete='off' className={`Input bg-orange-200 focus:outline-none w-full`} onChange={handleSearchInputChange}
+                        <div className={`text-md gap-3 flex items-center bg-orange-200 py-1 md:px-2 px-1 w-[17em] relative`}>
+                            <button><FaSearch size="17" color='black' /></button>
+                            <input type="search" name="Search" value={searchInput} onChange={handleInputChange} placeholder={'Search for ' + (typedText + '|')} autoComplete='off' className={`Input bg-orange-200 focus:outline-none w-full`}
                             />
+                            {searchInput && (
+                                <div className="absolute bg-orange-100 w-full -bottom-4 left-0 translate-y-1/2 shadow-md">
+                                    {filteredItems.map((item, index) => (
+                                        <Link to={`/${filteredItems[0].split(' ')[0]}`}><div key={index} className="px-4 py-1 cursor-pointer">{item}</div></Link>
+                                    ))}
+                                </div>
+                            )}
                         </div>
                         <div className='relative'>
                             <button><CiShoppingCart size={32} color='orange' onClick={() => handleShoppingCart(true)} /></button>
