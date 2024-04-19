@@ -12,6 +12,10 @@ input[type="search"]::placeholder {
 input[type="checkbox"]:checked {
   background-color: black;
 }
+/* 
+.slick-prev{
+  font-size: 10px;
+} */
 
 .slick-prev:before,
 .slick-next:before {

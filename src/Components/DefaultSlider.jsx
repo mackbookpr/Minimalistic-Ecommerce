@@ -24,10 +24,10 @@ const ImageSlider = ({ images }) => {
                         alt={`image-${index}`}
                         className={`max-h-[30em] w-full object-cover z-10`}
                     />
-                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-5">
-                        <p className='xl:text-[30px] font-semibold text-[20px] text-black filter contrast-150'>{image.text}</p>
+                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center md:gap-5 gap-1">
+                        <p className='md:text-[40px] font-semibold text-[20px] text-black filter contrast-150 '>{image.text}</p>
                         <Link to={`/${extractImageName(image.src)}`}>
-                            <button className='py-2 px-5 bg-orange-400 text-white rounded-md text-sm'>Shop Now</button>
+                            <button className='md:py-2 md:px-5 px-2 py-1 bg-orange-400 text-white rounded-md md:text-sm text-[10px]'>Shop Now</button>
                         </Link>
                     </div>
                 </div>

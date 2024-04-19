@@ -128,12 +128,12 @@ function Navbar() {
     };
     return (
         <section className='sticky w-full top-0 z-50'>
-            <section className='xl:max-w-[1265px] lg:max-w-[1035px] m-auto shadow-lg py-3 flex items-center justify-between h-[70px] gap-10 px-10 bg-white relative'>
-                <h1 className={`text-xl text-orange-400 font-bold`}><Link to="/">Minimalistic Ecommerce</Link></h1>
+            <section className='xl:max-w-[1265px] lg:max-w-[1035px] md:max-w-[830px] m-auto shadow-lg py-3 flex items-center justify-between h-[70px] gap-10 px-10 bg-white relative'>
+                <h1 className={`text-md text-orange-400 font-bold md:text-xl`}><Link to="/">Minimalistic Ecommerce</Link></h1>
                 <div className='flex gap-24 justify-between text-orange-400 items-center'>
                     <div className={`flex items-center justify-end gap-2 md:gap-5`}>
-                        <div className={`text-md gap-3 flex items-center bg-orange-200 py-1 md:px-2 px-1 w-[17em] relative`}>
-                            <button><FaSearch size="17" color='black' /></button>
+                        <div className={`text-md gap-3 items-center bg-orange-200 sm:py-1 py-0 md:px-2 px-1 w-[17em] relative hidden sm:flex`}>
+                            <button><FaSearch color='black' className='text-md'/></button>
                             <input type="search" name="Search" value={searchInput} onChange={handleInputChange} placeholder={'Search for ' + (typedText + '|')} autoComplete='off' className={`Input bg-orange-200 focus:outline-none w-full`}
                             />
                             {searchInput && (

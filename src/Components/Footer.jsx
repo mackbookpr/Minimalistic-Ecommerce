@@ -2,7 +2,7 @@ import React from 'react'
 
 function Footer() {
     return (
-        <div className='bg-orange-200 h-[5em] mt-2 flex gap-5 justify-center items-center'>
+        <div className='bg-orange-200 h-[7em] sm:h-[5em] mt-2 flex sm:gap-5 gap-2 justify-center items-center border-2 border-black text-[8px] sm:text-[20px] flex-wrap sm:flex-nowrap'>
             <a href="#" className='hover:underline'>About</a>
             <a href="#" className='hover:underline'>FAQs</a>
             <a href="#" className='hover:underline'>Contact Us</a>
