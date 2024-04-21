@@ -11,7 +11,7 @@ import Trending from '../Components/Trending';
 function DefaultPage() {
 
     const images = [
-        { src: SkinCare, text: "Revive skin" }, { src: Kitchen, text: "Refine cuisine" }, { src: Electronics, text: "Upgrade home" }, { src: Furniture, text: "Live Well" },
+        { src: SkinCare, text: "Revive skin" }, { src: Kitchen, text: "Refine cuisine" }, { src: Electronics, text: "New Home" }, { src: Furniture, text: "Live Well" },
     ];
     return (
 
