@@ -26,7 +26,7 @@ function DefaultProductPageSkinCare() {
             product = <Product1 />;
     }
     return (
-        <div className='max-w-[1220px] flex h-[500px] m-auto gap-10 my-10'>{product}</div>
+        <div className={`xl:max-w-[1245px] lg:max-w-[1025px] h-[500px] md:max-w-[750px] m-auto gap-10 flex-col px-10`}>{product}</div>
     )
 }
 

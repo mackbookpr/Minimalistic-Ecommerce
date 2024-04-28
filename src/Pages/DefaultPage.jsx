@@ -11,11 +11,11 @@ import Trending from '../Components/Trending';
 function DefaultPage() {
 
     const images = [
-        { src: SkinCare, text: "Revive skin" }, { src: Kitchen, text: "Refine cuisine" }, { src: Electronics, text: "New Home" }, { src: Furniture, text: "Live Well" },
+        { src: SkinCare, text: "Revive skin" }, { src: Kitchen, text: "Refine food" }, { src: Electronics, text: "New Home" }, { src: Furniture, text: "Live Well" },
     ];
     return (
 
-        <div class="xl:max-w-[1265px] lg:max-w-[1035px] md:max-w-[830px] m-auto px-9 py-2">
+        <div class="xl:max-w-[1265px] lg:max-w-[1035px] md:max-w-[830px] m-auto px-12 py-20">
             <ImageSlider images={images} />
             <Trending/>
             <Newsletter />

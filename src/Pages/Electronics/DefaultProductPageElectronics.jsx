@@ -28,7 +28,7 @@ function DefaultProductPage() {
     }
 
     return (
-        <div className={`xl:max-w-[1245px] lg:max-w-[1025px] h-[500px] md:max-w-[800px] m-auto gap-10 my-10 flex-col px-8`}>
+        <div className={`xl:max-w-[1245px] lg:max-w-[1025px] h-[500px] md:max-w-[750px] m-auto gap-10 flex-col px-10`}>
             {Product}
         </div>
     );

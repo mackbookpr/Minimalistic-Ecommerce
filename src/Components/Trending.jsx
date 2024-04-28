@@ -33,7 +33,8 @@ function Trending() {
 
 
     return (
-        <div><h1 className='text-xl mt-14 mb-10 font-semibold'>Trending Now</h1>
+        <div>
+            <h1 className='text-xl mt-14 mb-10 font-semibold'>Trending Now</h1>
             <div className="grid lg:grid-cols-4 xl:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 gap-2 mt-5">
                 {Object.keys(imagesElectronics).map((imageName, index) => (
                     <Link key={index} to={`/Electronics/${getProductIdFromImageName('Electronics', imageName)}`}>
