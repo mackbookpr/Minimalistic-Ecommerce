@@ -13,6 +13,7 @@ import Trending from "../../Components/Trending";
 import Newsletter from "../../Components/Newsletter";
 import Footer from "../../Components/Footer";
 import Categories from '../../Components/Categories';
+import Inspiration from '../../Components/Inspiration';
 
 function DefaultSkinCare() {
   const [colorDropDown, setColorDropDown] = useState(false);
@@ -130,6 +131,7 @@ function DefaultSkinCare() {
 
         </div>
       </div>
+      <Inspiration />
     </>
   )
 }
