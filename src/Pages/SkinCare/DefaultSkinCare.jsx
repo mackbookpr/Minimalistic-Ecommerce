@@ -66,39 +66,39 @@ function DefaultSkinCare() {
     <>
       <Categories />
       <div className='py-12'>
-        <div className='max-w-[1165px] mt-20 flex justify-between border border-t-black border-b-black border-l-0 border-r-0 items-center sticky m-auto z-10'>
+        <div className='text-[10px] md:text-lg sm:text-md lg:flex-row lg:gap-0 gap-2 flex-col xl:w-[1165px] lg:w-[945px] md:w-[730px] sm:w-[500px] w-[260px] mt-20 flex justify-between border-none lg:border-2 border-t-black border-b-black border-l-black border-r-black items-center sticky m-auto z-10'>
           <div className='flex items-center'>
-            <h1 className='text-md border border-r-black py-2 border-l-0 pe-5'>Filter</h1>
+            <h1 className='text-md border-2 border-black border-r-0 py-2 border-l-2 border-b-black border-t-black ps-2 md:pe-5 px-1'>Filter</h1>
             <div className="relative">
-              <button><h1 className='text-md border border-r-black py-2 border-l-0 pe-4 ps-5 flex items-center gap-3' onClick={() => setColorDropDown(!colorDropDown)}>Color {colorDropDown ? <FaAngleDown /> : <FaAngleUp />}</h1></button>
+              <button><h1 className='text-md border-2 border-r-0 border-b-black border-t-black py-2 border-l-black md:px-5 px-1 flex items-center gap-3' onClick={() => { setColorDropDown(!colorDropDown); setSortByDropDown(false); }}>Color {colorDropDown ? <FaAngleDown /> : <FaAngleUp />}</h1></button>
               {colorDropDown &&
-                (<div className="absolute left-0 top-12 flex flex-col w-full rounded-lg bg-orange-300">
-                  <button className='border border-b-0 border-r-0 border-l-0 flex items-center justify-between px-5' onClick={() => handleColor('Blue')}>
+                (<div className="absolute -left-14 md:left-0 md:top-12 top-10 flex flex-col md:w-[150px] w-[120px] rounded-lg bg-orange-300">
+                  <button className='border border-b-0 border-r-0 border-l-0 flex items-center justify-between px-5 text-sm py-2' onClick={() => handleColor('Blue')}>
                     <div className='rounded-full bg-blue-500 w-5 h-5' ></div>
                     Blue
                   </button>
-                  <button className='border border-b-0 border-r-0 border-l-0 flex items-center justify-between px-5' onClick={() => handleColor('Black')}>
+                  <button className='border border-b-0 border-r-0 border-l-0 flex items-center justify-between px-5 text-sm py-2' onClick={() => handleColor('Black')}>
                     <div className='rounded-full bg-black w-5 h-5' ></div>
                     Black
                   </button>
-                  <button className='border border-b-0 border-r-0 border-l-0 flex items-center justify-between px-5' onClick={() => handleColor('Orange')}>
+                  <button className='border border-b-0 border-r-0 border-l-0 flex items-center justify-between px-5 text-sm py-2' onClick={() => handleColor('Orange')}>
                     <div className='rounded-full bg-orange-500 w-5 h-5' ></div>
                     Orange
                   </button>
-                  <button className='border border-b-0 border-r-0 border-l-0 flex items-center justify-between px-5' onClick={() => handleColor('White')}>
+                  <button className='border border-b-0 border-r-0 border-l-0 flex items-center justify-between px-5 text-sm py-2' onClick={() => handleColor('White')}>
                     <div className='rounded-full bg-white w-5 h-5' ></div>
                     White
                   </button>
                 </div>)
               }
             </div>
-            <Link to="/" className='text-md border border-r-black py-2 border-l-0 px-5'>Home</Link>
-            <Link to="/Electronics" className='text-md border border-r-black py-2 border-l-0 px-5'>Electronics</Link>
-            <Link to="/Kitchen" className='text-md border border-r-black py-2 border-l-0 px-5'>Kitchen</Link>
-            <Link to="/Furniture" className='text-md border border-r-black py-2 border-l-0 px-5'>Furniture</Link>
+            <Link to="/" className='text-md border-2 border-r-0 py-2 border-l-black border-t-black border-b-black md:px-5 px-1'>Home</Link>
+            <Link to="/Electronics" className='text-md border-2 border-t-black border-r-0 border-b-black py-2 border-l-black md:px-5 px-1'>Electronics</Link>
+            <Link to="/Kitchen" className='text-md border-2 border-t-black border-r-0 border-b-black py-2 border-l-black md:px-5 px-1'>Kitchen</Link>
+            <Link to="/Furniture" className='text-md border-2 border-black border-t-black border-r-black border-b-black py-2 border-l-black md:px-5 px-1'>Furniture</Link>
           </div>
-          <div className='relative'>
-            <button><h1 className='text-md border border-l-black border-r-0 py-2 border-l-0 flex items-center gap-3' onClick={() => setSortByDropDown(!sortByDropDown)}>Sort By {sortByDropDown ? <FaAngleDown /> : <FaAngleUp />}</h1></button>
+          <div className='relative border-2 border-l-black border-r-black border-b-black border-t-black'>
+            <button><h1 className='text-md px-2  py-2 border-l-0 flex items-center gap-3' onClick={() => { setSortByDropDown(!sortByDropDown); setColorDropDown(false); }}>Sort By {sortByDropDown ? <FaAngleDown /> : <FaAngleUp />}</h1></button>
             {sortByDropDown &&
               (<div className="absolute -left-12 top-12 flex flex-col w-[150px] rounded-lg bg-orange-300">
                 <button className='border border-b-0 border-r-0 border-l-0' onClick={() => toggleSortOrder('asc')}>Price:Low to High</button>
@@ -107,15 +107,15 @@ function DefaultSkinCare() {
             }
           </div>
         </div>
-        <div className='m-auto lg:max-w-[950px] md:max-w-[750px] xl:max-w-[1200px] xl:px-3 my-1 flex flex-col'>
+        <div className='m-auto lg:max-w-[950px] md:max-w-[750px] xl:max-w-[1200px] xl:px-5 lg:px-1 md:px-2 px-12 my-1 flex flex-col'>
           <div className='grid lg:grid-cols-4 xl:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 gap-5 mt-5'>
             {filteredProducts.map(item => (
               <Link to={`/SkinCare/${item.id}`}>
                 <div key={item.id} className='relative border-2 border-gray-500 hover:border-black flex flex-col gap-2 cursor-pointer'>
-                  {item.imgName === 'BlackSkinCare' && <img src={BlackSkinCare} className="w-[270px] h-[200px]" alt="" />}
-                  {item.imgName === 'BlueSkinCare' && <img src={BlueSkinCare} className="w-[270px] h-[200px]" alt="" />}
-                  {item.imgName === 'OrangeSkinCare' && <img src={OrangeSkinCare} className="w-[270px] h-[200px]" alt="" />}
-                  {item.imgName === 'WhiteSkinCare' && <img src={WhiteSkinCare} className="w-[270px] h-[200px]" alt="" />}
+                  {item.imgName === 'BlackSkinCare' && <img src={BlackSkinCare} className="xl:w-[270px] xl:h-[200px] lg:w-[270px] lg:h-[200px] md:w-[270px] md:h-[200px] sm:w-[370px] sm:h-[350px] w-[535px] h-[470px]" alt="" />}
+                  {item.imgName === 'BlueSkinCare' && <img src={BlueSkinCare} className="xl:w-[270px] xl:h-[200px] lg:w-[270px] lg:h-[200px] md:w-[270px] md:h-[200px] sm:w-[370px] sm:h-[350px] w-[535px] h-[470px]" alt="" />}
+                  {item.imgName === 'OrangeSkinCare' && <img src={OrangeSkinCare} className="xl:w-[270px] xl:h-[200px] lg:w-[270px] lg:h-[200px] md:w-[270px] md:h-[200px] sm:w-[370px] sm:h-[350px] w-[535px] h-[470px]" alt="" />}
+                  {item.imgName === 'WhiteSkinCare' && <img src={WhiteSkinCare} className="xl:w-[270px] xl:h-[200px] lg:w-[270px] lg:h-[200px] md:w-[270px] md:h-[200px] sm:w-[370px] sm:h-[350px] w-[535px] h-[470px]" alt="" />}
                   <div>
                     <h1 className='px-2'>{item.name}</h1>
                     <h1 className='px-2 mb-2'>Price:{item.price}</h1>
