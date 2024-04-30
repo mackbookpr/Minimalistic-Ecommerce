@@ -13,6 +13,7 @@ import Footer from "../../Components/Footer";
 import Newsletter from '../../Components/Newsletter';
 import Trending from '../../Components/Trending';
 import Categories from '../../Components/Categories';
+import Inspiration from '../../Components/Inspiration';
 
 function DefaultElectronics() {
 
@@ -129,6 +130,7 @@ function DefaultElectronics() {
           <Trending />
           <Newsletter />
           <Footer />
+          <Inspiration />
         </div >
       </div>
     </>

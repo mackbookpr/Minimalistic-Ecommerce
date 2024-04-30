@@ -1,13 +1,20 @@
-import React from 'react'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 function Footer() {
+    const scrolltoTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    }
     return (
-        <div className='bg-orange-200 h-[7em] sm:h-[5em] mt-2 flex sm:gap-5 gap-2 justify-center items-center border-2 border-black text-[12px] sm:text-[20px]'>
-            <a href="#" className='hover:underline'>About</a>
-            <a href="#" className='hover:underline'>FAQs</a>
-            <a href="#" className='hover:underline'>Contact Us</a>
-            <a href="#" className='hover:underline'>Careers</a>
-            <a href="#" className='hover:underline'>Store Locator</a>
+        <div className='bg-orange-200 h-[7em] sm:h-[5em] mt-2 flex sm:gap-5 gap-2 justify-center items-center border-2 border-black text-[8px] sm:text-[20px]'>
+            <Link to="/" className='hover:underline' onClick={() => scrolltoTop()}>About</Link>
+            <Link to="/" className='hover:underline' onClick={() => scrolltoTop()}>FAQs</Link>
+            <Link to="/" className='hover:underline' onClick={() => scrolltoTop()}>Contact Us</Link>
+            <Link to="/" className='hover:underline' onClick={() => scrolltoTop()}>Careers</Link>
+            <Link to="/" className='hover:underline' onClick={() => scrolltoTop()}>Store Locator</Link>
         </div>
     )
 }

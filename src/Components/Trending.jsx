@@ -56,16 +56,22 @@ function Trending() {
 
                 ))}
                 {Object.keys(imagesFurniture).map((imageName, index) => (
-                    <div className="relative cursor-pointer border-2 border-gray-500 hover:border-black transition-all duration-400 sm:h-[280px] h-[380px]">
-                        <img key={index} src={imagesFurniture[imageName]} alt={imageName} className='object-cover w-[565px] h-[320px] sm:h-[220px] sm-[345px]' />
-                        <div className="absolute bottom-0 w-full h-[50px]">Price</div>
-                    </div>
+                    <Link key={index} to={`/Furniture/${getProductIdFromImageName('Furniture', imageName)}`}>
+                        <div className="relative cursor-pointer border-2 border-gray-500 hover:border-black sm:h-[280px] h-[380px] transition-all duration-400">
+                            <img key={index} src={imagesFurniture[imageName]} alt={imageName} className='object-cover w-[565px] h-[320px] sm:h-[220px] sm-[345px]' />
+                            <div className="w-full h-[20px] mt-2 ml-2">{getProductNameFromImageName('Furniture', imageName)}</div>
+                            <div className="w-full h-[20px] ml-2">&#x20B9;{getProductPriceFromImageName('Furniture', imageName)}</div>
+                        </div>
+                    </Link>
                 ))}
                 {Object.keys(imagesKitchen).map((imageName, index) => (
-                    <div className="relative cursor-pointer border-2 border-gray-500 hover:border-black transition-all duration-400 sm:h-[280px] h-[380px]">
-                        <img key={index} src={imagesKitchen[imageName]} alt={imageName} className='object-cover w-[565px] h-[320px] sm:h-[220px] sm:w-[345px]' />
-                        <div className="absolute bottom-0 w-full h-[50px]">Price</div>
+                    <Link key={index} to={`/Kitchen/${getProductIdFromImageName('Kitchen', imageName)}`}>
+                    <div className="relative cursor-pointer border-2 border-gray-500 hover:border-black sm:h-[280px] h-[380px] transition-all duration-400">
+                        <img key={index} src={imagesKitchen[imageName]} alt={imageName} className='object-cover w-[565px] h-[320px] sm:h-[220px] sm-[345px]' />
+                        <div className="w-full h-[20px] mt-2 ml-2">{getProductNameFromImageName('Kitchen', imageName)}</div>
+                        <div className="w-full h-[20px] ml-2">&#x20B9;{getProductPriceFromImageName('Kitchen', imageName)}</div>
                     </div>
+                </Link>
                 ))}
             </div></div >
     )

@@ -62,5 +62,69 @@
         "imgName": "WhiteSkinCare",
         "price": "500",
         "color": "White"
+    },
+    {
+        "id": 9,
+        "name": "Oceanic Feast Table",
+        "category": "Furniture",
+        "imgName": "OceanicFeastTable",
+        "price": "10000",
+        "color": "Blue"
+    },
+    {
+        "id": 10,
+        "name": "Shadow Haven Desk",
+        "category": "Furniture",
+        "imgName": "ShadowHavenDesk",
+        "price": "19000",
+        "color": "Black"
+    },
+    {
+        "id": 11,
+        "name": "SnowBed",
+        "category": "Furniture",
+        "imgName": "SnowBed",
+        "price": "10000",
+        "color": "White"
+    },
+    {
+        "id": 12,
+        "name": "Tangerine Dream Chest",
+        "category": "Furniture",
+        "imgName": "TangerineDreamChest",
+        "price": "16000",
+        "color": "Orange"
+    },
+    {
+        "id": 13,
+        "name": "AzureToaster",
+        "category": "Kitchen",
+        "imgName": "AzureToaster",
+        "price": "4000",
+        "color": "Blue"
+    },
+    {
+        "id": 14,
+        "name": "MidnightBakingPaper",
+        "category": "Kitchen",
+        "imgName": "MidnightBakingPaper",
+        "price": "1000",
+        "color": "Black"
+    },
+    {
+        "id": 15,
+        "name": "SnowCoffeeMaker",
+        "category": "Kitchen",
+        "imgName": "SnowCoffeeMaker",
+        "price": "3000",
+        "color": "White"
+    },
+    {
+        "id": 16,
+        "name": "TangerineTongs",
+        "category": "Kitchen",
+        "imgName": "TangerineTongs",
+        "price": "500",
+        "color": "Orange"
     }
 ]

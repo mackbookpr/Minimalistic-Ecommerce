@@ -7,6 +7,7 @@ import SkinCare from "../Assets/Default/SkinCare.jpg"
 import Footer from '../Components/Footer';
 import Newsletter from '../Components/Newsletter';
 import Trending from '../Components/Trending';
+import Inspiration from '../Components/Inspiration';
 
 function DefaultPage() {
 
@@ -15,11 +16,12 @@ function DefaultPage() {
     ];
     return (
 
-        <div class="xl:max-w-[1265px] lg:max-w-[1035px] md:max-w-[830px] m-auto px-12 py-20">
+        <div class="xl:max-w-[1265px] lg:max-w-[1035px] md:max-w-[830px] m-auto px-12 pt-20">
             <ImageSlider images={images} />
             <Trending/>
             <Newsletter />
             <Footer />
+            <Inspiration/>
         </div >
 
 
