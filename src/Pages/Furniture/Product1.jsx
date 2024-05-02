@@ -1,22 +1,31 @@
 import React, { useState, useEffect } from 'react';
-import OrangeSkinCare from "../../Assets/SkinCare/OrangeSkinCare.jpeg";
+import { useHistory } from 'react-router-dom';
+import OceanicFeastTable from "../../Assets/Furniture/OceanicFeastTable.png";
 import { useCart } from "../../CartContext";
 import { v4 as uuidv4 } from 'uuid';
-import Categories from '../../Components/Categories';
+import { useMediaQuery } from 'react-responsive';
 import Trending from "../../Components/Trending";
 import Newsletter from "../../Components/Newsletter";
 import Footer from "../../Components/Footer";
-import { useMediaQuery } from 'react-responsive';
+import Categories from '../../Components/Categories';
 
 function Product1() {
     const { addToCart } = useCart();
     const [Quantity, setQuantity] = useState(1);
-    const [cost, setCost] = useState(400);
+    const [cost, setCost] = useState(10000);
     const [Background, setBackground] = useState('');
 
     useEffect(() => {
-        setCost(Quantity * 400);
+        setCost(Quantity * 10000);
     }, [Quantity]);
+
+    function scrollToTop() {
+        window.scrollTo(0, 0);
+    }
+
+    useEffect(() => {
+        scrollToTop();
+    }, []);
 
     const increment = () => {
         setQuantity(prev => prev + 1);
@@ -29,11 +38,11 @@ function Product1() {
     const handleAddToCart = () => {
         addToCart({
             id: uuidv4(),
-            name: 'OrangeSkinCare',
-            price: 400,
+            name: 'OceanicFeastTable',
+            price: 9000,
             Quantity: Quantity,
             cost: cost,
-            productName: "Sunset Glow"
+            productName: "Oceanic Feast Table"
         });
     };
 
@@ -44,36 +53,28 @@ function Product1() {
     const handleMouseLeave = () => {
         setBackground('');
     };
-    function scrollToTop() {
-        window.scrollTo(0, 0);
-    }
-
-    useEffect(() => {
-        scrollToTop();
-    }, []);
 
     const isLargeScreen = useMediaQuery({ minWidth: 1024 });
     const containerClass = isLargeScreen ? 'flex flex-row' : 'flex flex-col';
+
     return (
         <>
             <Categories />
             <div className='pt-[8rem]'>
-                <h1 className='absolute lg:text-5xl md:text-2xl font-bold flex left-1/2 justify-center -translate-x-1/2 z-10'>Sunset Glow</h1>
+                <h1 className='absolute lg:text-5xl md:text-2xl font-bold flex left-1/2 justify-center -translate-x-1/2 z-10 '>Oceanic Feast Table</h1>
                 <div className={`${containerClass} gap-5`}>
                     <div className="lg:w-1/2 w-full mt-16 lg:mb-8 mb-2 relative md:h-[550px] lg:h-[380px] h-[400px]">
-                        <img src={OrangeSkinCare} alt="" className='w-full h-full object-cover border-2 border-black' />
+                        <img src={OceanicFeastTable} alt="" className='w-full h-full object-cover border-2 border-black z-10' />
                     </div>
-                    <div className="lg:w-1/2 w-full bg-orange-200 lg:py-40 py-10 h-auto px-3 flex text-lg flex-col gap-10 border border-black lg:h-[440px] justify-center">
-                        <p>
-
-                            Introducing Sunset Glow by OrangeSkinCare: Unveil the radiant warmth of sunset hues in every drop. Embrace the natural beauty of golden-hour glow, crafted to illuminate and rejuvenate your skin. Experience a harmonious blend of luxury and nature, basking in the luminosity of Sunset Glow.</p>
+                    <div className="lg:w-1/2 w-full bg-orange-200 lg:py-40 py-10 h-auto px-2 flex text-lg flex-col gap-10 border border-black lg:h-[440px] justify-center">
+                        <p className='sm:text-left text-center'>OceanicFeastTable: A masterpiece of elegance, echoing the tranquil blues of the sea. Its sleek design invites gatherings, transforming meals into seaside feasts and memories into treasures.</p>
 
                         <div className="flex justify-between items-center sm:flex-row flex-col gap-2">
                             <h1 className='md:text-3xl text-md font-bold'>Quantity</h1>
                             <div className='flex'>
-                                <button className='px-4 py-2 bg-black text-white text-3xl' onClick={decrement}>-</button>
+                                <button className='sm:px-4 sm:py-2 py-1 px-2 bg-black text-white text-3xl' onClick={decrement}>-</button>
                                 <h1 className='flex justify-center items-center w-[3em]'>{Quantity}</h1>
-                                <button className='px-4 py-2 bg-black text-white' onClick={increment}>+</button>
+                                <button className='sm:px-4 sm:py-2 py-1 px-2 bg-black text-white' onClick={increment}>+</button>
                             </div>
                             <h1>&#x20B9;{cost}</h1>
                         </div>
@@ -84,16 +85,18 @@ function Product1() {
                         </div>
                     </div>
                 </div>
+
                 <div className="flex gap-5 mt-5 md:flex-nowrap flex-wrap justify-center">
-                    <div className="sm:w-1/3 w-full bg-orange-300 h-[80px] flex items-center justify-center md:text-lg text-sm font-semibold">Weight:0.5kgs</div>
-                    <div className="sm:w-1/3 w-full  bg-orange-300 h-[80px] flex items-center justify-center md:text-lg text-sm font-semibold">Texture:Silky Smooth</div>
+                    <div className="sm:w-1/3 w-full bg-orange-300 h-[80px] flex items-center justify-center md:text-lg text-sm font-semibold">Weight:20kg</div>
+                    <div className="sm:w-1/3 w-full  bg-orange-300 h-[80px] flex items-center justify-center md:text-lg text-sm font-semibold">Texture:Plastic</div>
+                    <div className="sm:w-1/3 w-full bg-orange-300 h-[80px] flex items-center justify-center md:text-lg text-sm font-semibold">Size:39inch x 31inch</div>
                 </div>
                 <Trending />
                 <Newsletter />
                 <Footer />
             </div>
         </>
-    )
+    );
 }
 
-export default Product1
+export default Product1;

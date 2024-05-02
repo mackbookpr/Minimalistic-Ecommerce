@@ -13,6 +13,14 @@ import BlackSkinCare from "../Assets/SkinCare/BlackSkinCare.jpeg"
 import BlueSkinCare from "../Assets/SkinCare/BlueSkinCare.png"
 import OrangeSkinCare from "../Assets/SkinCare/OrangeSkinCare.jpeg"
 import WhiteSkinCare from "../Assets/SkinCare/WhiteSkinCare.png"
+import OceanicFeastTable from "../Assets/Furniture/OceanicFeastTable.png"
+import SnowBed from "../Assets/Furniture/SnowBed.png"
+import ShadowHavenDesk from "../Assets/Furniture/ShadowHavenDesk.png"
+import TangerineDreamChest from "../Assets/Furniture/TangerineDreamChest.png"
+import AzureToaster from "../Assets/Kitchen/AzureToaster.png"
+import MidnightBakingPaper from "../Assets/Kitchen/MidnightBakingPaper.png"
+import SnowCoffeeMaker from "../Assets/Kitchen/SnowCoffeeMaker.png"
+import TangerineTongs from "../Assets/Kitchen/TangerineTongs.png"
 
 function Navbar() {
 
@@ -40,6 +48,22 @@ function Navbar() {
                 return OrangeSkinCare;
             case "WhiteSkinCare":
                 return WhiteSkinCare;
+            case "OceanicFeastTable":
+                return OceanicFeastTable;
+            case "ShadowHeavenDesk":
+                return ShadowHavenDesk;
+            case "SnowBed":
+                return SnowBed;
+            case "TangerineDreamChest":
+                return TangerineDreamChest;
+            case "AzureToaster":
+                return AzureToaster;
+            case "Midnight Baking Paper":
+                return MidnightBakingPaper;
+            case "TangerineTongs":
+                return TangerineTongs;
+            case "SnowCoffeeMaker":
+                return SnowCoffeeMaker;
             default:
                 return BlueRefrigerator;
         }

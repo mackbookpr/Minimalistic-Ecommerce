@@ -1,101 +1,140 @@
 import React from 'react'
-import {useState,useEffect} from 'react';
+import Products from "../../Data/data.json"
+import { useState } from 'react';
+import { FaAngleDown } from "react-icons/fa6";
+import { FaAngleUp } from "react-icons/fa6";
+import { useEffect } from 'react';
+import OceanicFeastTable from "../../Assets/Furniture/OceanicFeastTable.png"
+import ShadowHavenDesk from "../../Assets/Furniture/ShadowHavenDesk.png"
+import SnowBed from "../../Assets/Furniture/SnowBed.png"
+import TangerineDreamChest from "../../Assets/Furniture/TangerineDreamChest.png"
+import { Link } from 'react-router-dom';
+import Footer from "../../Components/Footer";
+import Newsletter from '../../Components/Newsletter';
+import Trending from '../../Components/Trending';
+import Categories from '../../Components/Categories';
+import Inspiration from '../../Components/Inspiration';
 
-function DefaultFurniture() {
+function DefaultElectronics() {
 
-  // const [colorDropDown, setColorDropDown] = useState(false);
-  // const [sortByDropDown, setSortByDropDown] = useState(false);
-  // const [selectedColor, setSelectedColor] = useState([]);
-  // const [sortOrder, setSortOrder] = useState('asc');
-  // const [filteredProducts, setFilteredProducts] = useState(Products);
+  const [colorDropDown, setColorDropDown] = useState(false);
+  const [sortByDropDown, setSortByDropDown] = useState(false);
+  const [selectedColor, setSelectedColor] = useState([]);
+  const [sortOrder, setSortOrder] = useState('asc');
+  const [filteredProducts, setFilteredProducts] = useState([]);
 
-  // const handleColor = (color) => {
-  //   const newSelectedColor = [...selectedColor];
-  //   if (!newSelectedColor.includes(color.toLowerCase())) {
-  //     newSelectedColor.push(color.toLowerCase());
-  //   } else {
-  //     newSelectedColor.splice(selectedColor.indexOf(color.toLowerCase()), 1);
-  //   }
-  //   setSelectedColor(newSelectedColor);
-  // };
+  const handleColor = (color) => {
+    const newSelectedColor = [...selectedColor];
+    if (!newSelectedColor.includes(color.toLowerCase())) {
+      newSelectedColor.push(color.toLowerCase());
+    } else {
+      newSelectedColor.splice(selectedColor.indexOf(color.toLowerCase()), 1);
+    }
+    setSelectedColor(newSelectedColor);
+  };
 
-  // const toggleSortOrder = (order) => {
-  //   setSortOrder(order);
-  // };
+  const toggleSortOrder = (order) => {
+    setSortOrder(order);
+  };
 
-  // useEffect(() => {
-  //   const filteredProducts = Products.filter(product =>
-  //     selectedColor.length === 0 || selectedColor.includes(product.color.toLowerCase())
-  //   );
+  useEffect(() => {
 
-  //   const FilteredProducts = filteredProducts.sort((a, b) => {
-  //     if (sortOrder === 'asc') {
-  //       return a.price - b.price;
-  //     } else {
-  //       return b.price - a.price;
-  //     }
-  //   });
+    const products = Products.filter(Product => Product.category === "Furniture");
 
-  //   setFilteredProducts(FilteredProducts);
-  // }, [selectedColor, sortOrder]);
+    const filteredProducts = products.filter(product =>
+      selectedColor.length === 0 || (selectedColor.includes(product.color.toLowerCase()))
+    );
+
+    const FilteredProducts = filteredProducts.sort((a, b) => {
+      if (sortOrder === 'asc') {
+        return a.price - b.price;
+      } else {
+        return b.price - a.price;
+      }
+    });
+
+    setFilteredProducts(FilteredProducts);
+  }, [selectedColor, sortOrder]);
+
+  function scrollToTop() {
+    window.scrollTo(0, 0);
+  }
+
+  useEffect(() => {
+    scrollToTop();
+  }, []);
 
   return (
     <>
-      {/* <div className='max-w-[1238px] flex justify-between border border-t-black border-b-black border-l-0 border-r-0 items-center sticky m-auto z-50'>
-        <div className='flex items-center'>
-          <h1 className='text-xl border border-r-black py-2 border-l-0 pe-5 px-1.5'>Filter</h1>
-          <div className="relative">
-            <button><h1 className='text-xl border border-r-black py-2 border-l-0 pe-10 ps-5 flex items-center gap-3' onClick={() => setColorDropDown(!colorDropDown)}>Color {colorDropDown ? <FaAngleDown /> : <FaAngleUp />}</h1></button>
-            {colorDropDown &&
-              (<div className="absolute left-0 top-12 flex flex-col w-full rounded-lg bg-orange-300">
-                <button className='border border-b-0 border-r-0 border-l-0 flex items-center justify-between px-5 text-lg' onClick={() => handleColor('Blue')}>
-                  <div className='rounded-full bg-blue-500 w-5 h-5' ></div>
-                  Blue
-                </button>
-                <button className='border border-b-0 border-r-0 border-l-0 flex items-center justify-between text-lg px-5' onClick={() => handleColor('Black')}>
-                  <div className='rounded-full bg-black w-5 h-5' ></div>
-                  Black
-                </button>
-                <button className='border border-b-0 border-r-0 border-l-0 flex items-center justify-between text-lg px-5' onClick={() => handleColor('Orange')}>
-                  <div className='rounded-full bg-orange-500 w-5 h-5' ></div>
-                  Orange
-                </button>
-                <button className='border border-b-0 border-r-0 border-l-0 flex items-center justify-between text-lg px-5' onClick={() => handleColor('White')}>
-                  <div className='rounded-full bg-white w-5 h-5' ></div>
-                  White
-                </button>
+      <Categories />
+      <div className='py-12'>
+        <div className='text-[10px] md:text-lg sm:text-md lg:flex-row lg:gap-0 gap-2 flex-col xl:w-[1165px] lg:w-[945px] md:w-[730px] sm:w-[500px] w-[260px] mt-20 flex justify-between border-none lg:border-2 border-t-black border-b-black border-l-black border-r-black items-center sticky m-auto z-10'>
+          <div className='flex items-center'>
+            <h1 className='text-md border-2 border-black border-r-0 py-2 border-l-2 border-b-black border-t-black ps-2 md:pe-5 px-1'>Filter</h1>
+            <div className="relative">
+              <button><h1 className='text-md border-2 border-r-0 border-b-black border-t-black py-2 border-l-black md:px-5 px-1 flex items-center gap-3' onClick={() => { setColorDropDown(!colorDropDown); setSortByDropDown(false); }}>Color {colorDropDown ? <FaAngleDown /> : <FaAngleUp />}</h1></button>
+              {colorDropDown &&
+                (<div className="absolute -left-14 md:left-0 md:top-12 top-10 flex flex-col md:w-[150px] w-[120px] rounded-lg bg-orange-300">
+                  <button className='border border-b-0 border-r-0 border-l-0 flex items-center justify-between px-5 text-sm py-2' onClick={() => handleColor('Blue')}>
+                    <div className='rounded-full bg-blue-500 w-5 h-5' ></div>
+                    Blue
+                  </button>
+                  <button className='border border-b-0 border-r-0 border-l-0 flex items-center justify-between px-5 text-sm py-2' onClick={() => handleColor('Black')}>
+                    <div className='rounded-full bg-black w-5 h-5' ></div>
+                    Black
+                  </button>
+                  <button className='border border-b-0 border-r-0 border-l-0 flex items-center justify-between px-5 text-sm py-2' onClick={() => handleColor('Orange')}>
+                    <div className='rounded-full bg-orange-500 w-5 h-5' ></div>
+                    Orange
+                  </button>
+                  <button className='border border-b-0 border-r-0 border-l-0 flex items-center justify-between px-5 text-sm py-2' onClick={() => handleColor('White')}>
+                    <div className='rounded-full bg-white w-5 h-5' ></div>
+                    White
+                  </button>
+                </div>)
+              }
+            </div>
+            <Link to="/" className='text-md border-2 border-r-0 py-2 border-l-black border-t-black border-b-black md:px-5 px-1'>Home</Link>
+            <Link to="/Electronics" className='text-md border-2 border-t-black border-r-0 border-b-black py-2 border-l-black md:px-5 px-1'>Electronics</Link>
+            <Link to="/Kitchen" className='text-md border-2 border-t-black border-r-0 border-b-black py-2 border-l-black md:px-5 px-1'>Kitchen</Link>
+            <Link to="/Furniture" className='text-md border-2 border-black border-t-black border-r-black border-b-black py-2 border-l-black md:px-5 px-1'>Furniture</Link>
+          </div>
+          <div className='relative border-2 border-l-black border-r-black border-b-black border-t-black'>
+            <button><h1 className='text-md px-2  py-2 border-l-0 flex items-center gap-3' onClick={() => { setSortByDropDown(!sortByDropDown); setColorDropDown(false); }}>Sort By {sortByDropDown ? <FaAngleDown /> : <FaAngleUp />}</h1></button>
+            {sortByDropDown &&
+              (<div className="absolute -left-12 top-12 flex flex-col w-[150px] rounded-lg bg-orange-300">
+                <button className='border border-b-0 border-r-0 border-l-0' onClick={() => toggleSortOrder('asc')}>Price:Low to High</button>
+                <button className='border border-t-black border-b-0 border-r-0 border-l-0' onClick={() => toggleSortOrder('desc')}>Price:High to Low</button>
               </div>)
             }
           </div>
         </div>
-        <div className='relative'>
-          <button><h1 className='text-xl border border-l-black border-r-0 py-2 border-l-0 pe-2 flex items-center gap-3' onClick={() => setSortByDropDown(!sortByDropDown)}>Sort By {sortByDropDown ? <FaAngleDown /> : <FaAngleUp />}</h1></button>
-          {sortByDropDown &&
-            (<div className="absolute -left-12 top-12 flex flex-col w-[150px] rounded-lg bg-orange-300">
-              <button className='border border-b-0 border-r-0 border-l-0' onClick={() => toggleSortOrder('asc')}>Price:Low to High</button>
-              <button className='border border-t-black border-b-0 border-r-0 border-l-0' onClick={() => toggleSortOrder('desc')}>Price:High to Low</button>
-            </div>)
-          }
-        </div>
+        <div className='m-auto lg:max-w-[950px] md:max-w-[750px] xl:max-w-[1200px] xl:px-5 lg:px-1 md:px-2 px-12 my-1 flex flex-col'>
+          <div className='grid lg:grid-cols-4 xl:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 gap-5 mt-5'>
+            {filteredProducts.map(item => (
+              <Link to={`/Furniture/${item.id}`}>
+                <div key={item.id} className='relative border-2 border-gray-500 hover:border-black flex flex-col gap-2 cursor-pointer'>
+                  {item.imgName === 'OceanicFeastTable' && <img src={OceanicFeastTable} className="xl:w-[270px] xl:h-[200px] lg:w-[270px] lg:h-[200px] md:w-[270px] md:h-[200px] sm:w-[370px] sm:h-[350px] w-[535px] h-[470px]" alt="" />}
+                  {item.imgName === 'ShadowHavenDesk' && <img src={ShadowHavenDesk} className="xl:w-[270px] xl:h-[200px] lg:w-[270px] lg:h-[200px] md:w-[270px] md:h-[200px] sm:w-[370px] sm:h-[350px] w-[535px] h-[470px]" alt="" />}
+                  {item.imgName === 'SnowBed' && <img src={SnowBed} className="xl:w-[270px] xl:h-[200px] lg:w-[270px] lg:h-[200px] md:w-[270px] md:h-[200px] sm:w-[370px] sm:h-[350px] w-[535px] h-[470px]" alt="" />}
+                  {item.imgName === 'TangerineDreamChest' && <img src={TangerineDreamChest} className="xl:w-[270px] xl:h-[200px] lg:w-[270px] lg:h-[200px] md:w-[270px] md:h-[200px] sm:w-[370px] sm:h-[350px] w-[535px] h-[470px]" alt="" />}
+                  <div>
+                    <h1 className='px-2'>{item.name}</h1>
+                    <h1 className='px-2 mb-2'>Price:{item.price}</h1>
+                  </div>
+                </div>
+              </Link>
+
+            ))}
+          </div>
+          <Trending />
+          <Newsletter />
+          <Footer />
+          <Inspiration />
+        </div >
       </div>
-      <div className='m-auto max-w-[1270px] px-4 my-1 flex flex-col'>
-        <div className='grid grid-cols-4 gap-5 mt-5'>
-          {filteredProducts.map(item => (
-            <div key={item.id} className='relative'>
-              <div className='relative'>
-                {item.imgName === 'BlackComputer' && <img src={BlackComputer} className="rounded-t-xl" alt="" />}
-                {item.imgName === 'BlueRefrigerator' && <img src={BlueRefrigerator} className="rounded-t-xl" alt="" />}
-                {item.imgName === 'OrangeCCTVs' && <img src={OrangeCCTVs} className="rounded-t-xl" alt="" />}
-                {item.imgName === 'WhiteDefibrillator' && <img src={WhiteDefibrillator} className="rounded-t-xl" alt="" />}
-                <div className="absolute bg-black w-full left-0 top-0 h-full opacity-40 rounded-t-xl"></div>
-              </div>
-              <div className='flex flex-col items-center'>Price:{item.price}</div>
-            </div>
-          ))}
-        </div>
-      </div> */}
     </>
   )
 }
 
-export default DefaultFurniture
+export default DefaultElectronics;

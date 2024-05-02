@@ -10,6 +10,8 @@ import DefaultFurniture from './Pages/Furniture/DefaultFurniture.jsx';
 import DefaultKitchen from './Pages/Kitchen/DefaultKitchen.jsx';
 import DefaultProductPageElectronics from './Pages/Electronics/DefaultProductPageElectronics.jsx';
 import DefaultProductPageSkinCare from './Pages/SkinCare/DefaultProductPageSkinCare.jsx'
+import DefaultProductPageFurniture from './Pages/Furniture/DefaultProductPageFurniture.jsx'
+import DefaultProductPageKitchen from './Pages/Kitchen/DefaultProductPageKitchen.jsx'
 import { CartProvider } from "./CartContext.js";
 
 function App() {
@@ -24,7 +26,9 @@ function App() {
           <Route path="/SkinCare" element={<DefaultSkinCare />} />
           <Route path="/SkinCare/:productID" element={<DefaultProductPageSkinCare />}></Route>
           <Route path="/Furniture" element={<DefaultFurniture />} />
+          <Route path="/Furniture/:productID" element={<DefaultProductPageFurniture />}></Route>
           <Route path="/Kitchen" element={<DefaultKitchen />} />
+          <Route path="/Kitchen/:productID" element={<DefaultProductPageKitchen />}></Route>
         </Routes>
       </BrowserRouter >
     </CartProvider>

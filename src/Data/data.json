@@ -81,7 +81,7 @@
     },
     {
         "id": 11,
-        "name": "SnowBed",
+        "name": "Snow Bed",
         "category": "Furniture",
         "imgName": "SnowBed",
         "price": "10000",
@@ -97,7 +97,7 @@
     },
     {
         "id": 13,
-        "name": "AzureToaster",
+        "name": "Azure Toaster",
         "category": "Kitchen",
         "imgName": "AzureToaster",
         "price": "4000",
@@ -105,7 +105,7 @@
     },
     {
         "id": 14,
-        "name": "MidnightBakingPaper",
+        "name": "Midnight Baking Paper",
         "category": "Kitchen",
         "imgName": "MidnightBakingPaper",
         "price": "1000",
@@ -113,7 +113,7 @@
     },
     {
         "id": 15,
-        "name": "SnowCoffeeMaker",
+        "name": "Snow Coffee Maker",
         "category": "Kitchen",
         "imgName": "SnowCoffeeMaker",
         "price": "3000",
@@ -121,9 +121,9 @@
     },
     {
         "id": 16,
-        "name": "TangerineTongs",
+        "name": "Tangerine Tongs",
         "category": "Kitchen",
-        "imgName": "TangerineTongs",
+        "imgName": "Tangerine Tongs",
         "price": "500",
         "color": "Orange"
     }
