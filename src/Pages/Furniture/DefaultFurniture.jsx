@@ -72,7 +72,7 @@ function DefaultElectronics() {
           <div className='flex items-center'>
             <h1 className='text-md border-2 border-black border-r-0 py-2 border-l-2 border-b-black border-t-black ps-2 md:pe-5 px-1'>Filter</h1>
             <div className="relative">
-              <button><h1 className='text-md border-2 border-r-0 border-b-black border-t-black py-2 border-l-black md:px-5 px-1 flex items-center gap-3' onClick={() => { setColorDropDown(!colorDropDown); setSortByDropDown(false); }}>Color {colorDropDown ? <FaAngleDown /> : <FaAngleUp />}</h1></button>
+              <button><h1 className='text-md border-2 border-r-black border-b-black border-t-black py-2 border-l-black md:px-5 px-1 flex items-center gap-3' onClick={() => { setColorDropDown(!colorDropDown); setSortByDropDown(false); }}>Color {colorDropDown ? <FaAngleDown /> : <FaAngleUp />}</h1></button>
               {colorDropDown &&
                 (<div className="absolute -left-14 md:left-0 md:top-12 top-10 flex flex-col md:w-[150px] w-[120px] rounded-lg bg-orange-300">
                   <button className='border border-b-0 border-r-0 border-l-0 flex items-center justify-between px-5 text-sm py-2' onClick={() => handleColor('Blue')}>
@@ -94,10 +94,7 @@ function DefaultElectronics() {
                 </div>)
               }
             </div>
-            <Link to="/" className='text-md border-2 border-r-0 py-2 border-l-black border-t-black border-b-black md:px-5 px-1'>Home</Link>
-            <Link to="/Electronics" className='text-md border-2 border-t-black border-r-0 border-b-black py-2 border-l-black md:px-5 px-1'>Electronics</Link>
-            <Link to="/Kitchen" className='text-md border-2 border-t-black border-r-0 border-b-black py-2 border-l-black md:px-5 px-1'>Kitchen</Link>
-            <Link to="/Furniture" className='text-md border-2 border-black border-t-black border-r-black border-b-black py-2 border-l-black md:px-5 px-1'>Furniture</Link>
+            
           </div>
           <div className='relative border-2 border-l-black border-r-black border-b-black border-t-black'>
             <button><h1 className='text-md px-2  py-2 border-l-0 flex items-center gap-3' onClick={() => { setSortByDropDown(!sortByDropDown); setColorDropDown(false); }}>Sort By {sortByDropDown ? <FaAngleDown /> : <FaAngleUp />}</h1></button>
