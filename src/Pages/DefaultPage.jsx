@@ -16,7 +16,7 @@ function DefaultPage() {
     ];
     return (
 
-        <div class="xl:max-w-[1265px] lg:max-w-[1035px] md:max-w-[830px] m-auto px-12 pt-20">
+        <div class="xl:max-w-[1265px] lg:max-w-[1035px] md:max-w-[830px] m-auto px-12 pt-20 pb-2">
             <ImageSlider images={images} />
             <Trending/>
             <Newsletter />
