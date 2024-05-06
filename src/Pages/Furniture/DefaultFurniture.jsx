@@ -67,7 +67,7 @@ function DefaultElectronics() {
   return (
     <>
       <Categories />
-      <div className='py-12'>
+      <div className='pt-12 pb-2'>
         <div className='text-[10px] md:text-lg sm:text-md lg:flex-row lg:gap-0 gap-2 flex-col xl:w-[1165px] lg:w-[945px] md:w-[730px] sm:w-[500px] w-[260px] mt-20 flex justify-between border-none lg:border-2 border-t-black border-b-black border-l-black border-r-black items-center sticky m-auto z-10'>
           <div className='flex items-center'>
             <h1 className='text-md border-2 border-black border-r-0 py-2 border-l-2 border-b-black border-t-black ps-2 md:pe-5 px-1'>Filter</h1>

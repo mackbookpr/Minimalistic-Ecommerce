@@ -87,9 +87,9 @@ function Product2() {
                 </div>
 
                 <div className="flex gap-5 mt-5 md:flex-nowrap flex-wrap justify-center">
-                    <div className="sm:w-1/3 w-full bg-orange-300 h-[80px] flex items-center justify-center md:text-lg text-sm font-semibold">Weight:3.5kg</div>
-                    <div className="sm:w-1/3 w-full  bg-orange-300 h-[80px] flex items-center justify-center md:text-lg text-sm font-semibold">Texture:Plastic</div>
-                    <div className="sm:w-1/3 w-full bg-orange-300 h-[80px] flex items-center justify-center md:text-lg text-sm font-semibold">Size:19inch x 21inch</div>
+                    <div className="sm:w-1/3 w-full bg-orange-300 h-[80px] flex items-center justify-center md:text-lg text-sm font-semibold">Weight:20Kg</div>
+                    <div className="sm:w-1/3 w-full  bg-orange-300 h-[80px] flex items-center justify-center md:text-lg text-sm font-semibold">Texture:Crisp Cotton</div>
+                    <div className="sm:w-1/3 w-full bg-orange-300 h-[80px] flex items-center justify-center md:text-lg text-sm font-semibold">Size:49inch x 32inch</div>
                 </div>
                 <Trending />
                 <Newsletter />
