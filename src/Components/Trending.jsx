@@ -38,40 +38,40 @@ function Trending() {
             <div className="grid lg:grid-cols-4 xl:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 gap-2 mt-5">
                 {Object.keys(imagesElectronics).map((imageName, index) => (
                     <Link key={index} to={`/Electronics/${getProductIdFromImageName('Electronics', imageName)}`}>
-                        <div className="cursor-pointer relative border-gray-500 hover:border-black transition-all duration-400 border-2 sm:h-[280px] h-[380px]">
+                        <div className="cursor-pointer relative border-gray-500 hover:border-black transition-all duration-400 border-2 sm:h-[280px] h-[362px]">
                             <img src={imagesElectronics[imageName]} alt={imageName} className='object-cover w-[565px] h-[300px] sm:h-[220px] sm-[345px]' />
-                            <div className="w-full h-[20px] mt-2 ml-2">{getProductNameFromImageName('Electronics', imageName)}</div>
-                            <div className="w-full h-[20px] ml-2">&#x20B9;{getProductPriceFromImageName('Electronics', imageName)}</div>
+                            <div className="px-2">{getProductNameFromImageName('Electronics', imageName)}</div>
+                            <div className="px-2 mb-2">&#x20B9;{getProductPriceFromImageName('Electronics', imageName)}</div>
                         </div>
                     </Link>
                 ))}
                 {Object.keys(imagesSkinCare).map((imageName, index) => (
                     <Link key={index} to={`/SkinCare/${getProductIdFromImageName('Skincare', imageName)}`}>
-                        <div className="relative cursor-pointer border-2 border-gray-500 hover:border-black sm:h-[280px] h-[380px] transition-all duration-400">
+                        <div className="relative cursor-pointer border-2 border-gray-500 hover:border-black sm:h-[280px] h-[362px] transition-all duration-400">
                             <img key={index} src={imagesSkinCare[imageName]} alt={imageName} className='object-cover w-[565px] h-[300px] sm:h-[220px] sm-[345px]' />
-                            <div className="w-full h-[20px] mt-2 ml-2">{getProductNameFromImageName('Skincare', imageName)}</div>
-                            <div className="w-full h-[20px] ml-2">&#x20B9;{getProductPriceFromImageName('Skincare', imageName)}</div>
+                            <div className="px-2">{getProductNameFromImageName('Skincare', imageName)}</div>
+                            <div className="px-2 mb-2">&#x20B9;{getProductPriceFromImageName('Skincare', imageName)}</div>
                         </div>
                     </Link>
 
                 ))}
                 {Object.keys(imagesFurniture).map((imageName, index) => (
                     <Link key={index} to={`/Furniture/${getProductIdFromImageName('Furniture', imageName)}`}>
-                        <div className="relative cursor-pointer border-2 border-gray-500 hover:border-black sm:h-[280px] h-[380px] transition-all duration-400">
+                        <div className="relative cursor-pointer border-2 border-gray-500 hover:border-black sm:h-[280px] h-[362px] transition-all duration-400">
                             <img key={index} src={imagesFurniture[imageName]} alt={imageName} className='object-cover w-[565px] h-[300px] sm:h-[220px] sm-[345px]' />
-                            <div className="w-full h-[20px] mt-2 ml-2">{getProductNameFromImageName('Furniture', imageName)}</div>
-                            <div className="w-full h-[20px] ml-2">&#x20B9;{getProductPriceFromImageName('Furniture', imageName)}</div>
+                            <div className="px-2">{getProductNameFromImageName('Furniture', imageName)}</div>
+                            <div className="px-2 mb-2">&#x20B9;{getProductPriceFromImageName('Furniture', imageName)}</div>
                         </div>
                     </Link>
                 ))}
                 {Object.keys(imagesKitchen).map((imageName, index) => (
                     <Link key={index} to={`/Kitchen/${getProductIdFromImageName('Kitchen', imageName)}`}>
-                    <div className="relative cursor-pointer border-2 border-gray-500 hover:border-black sm:h-[280px] h-[380px] transition-all duration-400">
-                        <img key={index} src={imagesKitchen[imageName]} alt={imageName} className='object-cover w-[565px] h-[300px] sm:h-[220px] sm-[345px]' />
-                        <div className="w-full h-[20px] mt-2 ml-2">{getProductNameFromImageName('Kitchen', imageName)}</div>
-                        <div className="w-full h-[20px] ml-2">&#x20B9;{getProductPriceFromImageName('Kitchen', imageName)}</div>
-                    </div>
-                </Link>
+                        <div className="relative cursor-pointer border-2 border-gray-500 hover:border-black sm:h-[280px] h-[362px] transition-all duration-400">
+                            <img key={index} src={imagesKitchen[imageName]} alt={imageName} className='object-cover w-[565px] h-[300px] sm:h-[220px] sm-[345px]' />
+                            <div className="px-2">{getProductNameFromImageName('Kitchen', imageName)}</div>
+                            <div className="px-2 mb-2">&#x20B9;{getProductPriceFromImageName('Kitchen', imageName)}</div>
+                        </div>
+                    </Link>
                 ))}
             </div></div >
     )

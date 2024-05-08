@@ -110,10 +110,10 @@ function DefaultElectronics() {
             {filteredProducts.map(item => (
               <Link to={`/Kitchen/${item.id}`}>
                 <div key={item.id} className='relative border-2 border-gray-500 hover:border-black flex flex-col gap-2 cursor-pointer'>
-                  {item.imgName === 'AzureToaster' && <img src={AzureToaster} className="xl:w-[270px] xl:h-[200px] lg:w-[270px] lg:h-[200px] md:w-[270px] md:h-[200px] sm:w-[370px] sm:h-[350px] w-[535px] h-[470px]" alt="" />}
-                  {item.imgName === 'MidnightBakingPaper' && <img src={MidnightBakingPaper} className="xl:w-[270px] xl:h-[200px] lg:w-[270px] lg:h-[200px] md:w-[270px] md:h-[200px] sm:w-[370px] sm:h-[350px] w-[535px] h-[470px]" alt="" />}
-                  {item.imgName === 'SnowCoffeeMaker' && <img src={SnowCoffeeMaker} className="xl:w-[270px] xl:h-[200px] lg:w-[270px] lg:h-[200px] md:w-[270px] md:h-[200px] sm:w-[370px] sm:h-[350px] w-[535px] h-[470px]" alt="" />}
-                  {item.imgName === 'TangerineTongs' && <img src={TangerineTongs} className="xl:w-[270px] xl:h-[200px] lg:w-[270px] lg:h-[200px] md:w-[270px] md:h-[200px] sm:w-[370px] sm:h-[350px] w-[535px] h-[470px]" alt="" />}
+                  {item.imgName === 'AzureToaster' && <img src={AzureToaster} className="object-cover w-[565px] h-[300px] sm:h-[220px] sm-[345px]" alt="" />}
+                  {item.imgName === 'MidnightBakingPaper' && <img src={MidnightBakingPaper} className="object-cover w-[565px] h-[300px] sm:h-[220px] sm-[345px]" alt="" />}
+                  {item.imgName === 'SnowCoffeeMaker' && <img src={SnowCoffeeMaker} className="object-cover w-[565px] h-[300px] sm:h-[220px] sm-[345px]" alt="" />}
+                  {item.imgName === 'TangerineTongs' && <img src={TangerineTongs} className="object-cover w-[565px] h-[300px] sm:h-[220px] sm-[345px]" alt="" />}
                   <div>
                     <h1 className='px-2'>{item.name}</h1>
                     <h1 className='px-2 mb-2'>Price:{item.price}</h1>
