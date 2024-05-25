@@ -1,0 +1,48 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+input[type="search"]::placeholder {
+  color: black;
+}
+
+input[type="checkbox"]:checked {
+  background-color: black;
+}
+/* 
+.slick-prev{
+  font-size: 10px;
+} */
+
+.slick-prev:before,
+.slick-next:before {
+  font-family: 'slick';
+  font-size: 20px;
+  line-height: 1;
+  opacity: .75;
+  color: black !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img:hover{
+  cursor: pointer;
+}
+
+.slick-prev,
+.slick-next {
+    width: 10px; 
+    height: 10px;
+}
+
+.slick-prev:before,
+.slick-next:before {
+    font-size: 100px;
+    color: black !important;
+}
+.slick-arrow{
+  width:10px;
+}
