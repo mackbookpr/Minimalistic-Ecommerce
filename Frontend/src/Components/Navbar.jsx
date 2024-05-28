@@ -102,7 +102,7 @@ function Navbar() {
     };
 
     return (
-        (location.pathname !== '/Register' && location.pathname !== '/LoginPage') ? (
+        (location.pathname !== '/Register') ? (
             <section className='fixed top-0 w-full bg-white z-50'>
                 <section className='xl:max-w-[1265px] lg:max-w-[1035px] md:max-w-[830px] m-auto shadow-lg py-3 flex items-center justify-between h-[70px] gap-10 px-12 bg-white relative'>
                     <h1 className={`text-lg text-orange-400 font-bold md:text-2xl`}><Link to="/">Minimalistic Ecommerce</Link></h1>
@@ -119,8 +119,8 @@ function Navbar() {
                                     </div>
                                 )}
                             </div>
-                            <Link to="/Register" className='py-1 px-1.5 bg-orange-300 text-white rounded-md'>Register<RegisterationPage /></Link>
-                            <Link to="/LoginPage" className='py-1 px-1.5 bg-orange-300 text-white rounded-md'>Login<LoginPage /></Link>
+                            <Link to="/Register" className='py-1 px-1.5 bg-orange-300 text-white rounded-md'>Register</Link>
+                            {/* <Link to="/LoginPage" className='py-1 px-1.5 bg-orange-300 text-white rounded-md'>Login<LoginPage /></Link> */}
                             <div className='relative'>
                                 <button><CiShoppingCart size={32} color='orange' onClick={toggleShoppingCart} /></button>
                                 <h1 className='absolute -top-2 -right-2'>{totalQuantity}</h1>
