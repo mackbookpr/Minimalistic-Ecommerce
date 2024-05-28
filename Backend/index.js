@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 require('dotenv').config({ path: '/Secrets.env' });
+=======
+require('dotenv').config();
+>>>>>>> e008c71f9299667c0f59814ab22243fc8cb0747c
 
 const express = require('express');
 const Product = require('./Model/Product');

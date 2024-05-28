@@ -13,7 +13,11 @@
 
 # misc
 .DS_Store
+<<<<<<< HEAD
 Secrets.env
+=======
+.env
+>>>>>>> e008c71f9299667c0f59814ab22243fc8cb0747c
 .env.local
 .env.development.local
 .env.test.local
