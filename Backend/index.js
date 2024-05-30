@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express');
 const Product = require('./Model/Product');
 const bcrypt = require('bcryptjs');
@@ -10,9 +12,19 @@ const jwt = require('jsonwebtoken');
 const server = express();
 
 server.use(express.json());
+
+// Access environment variables
+const corsOrigin = process.env.corsOrigin;
+const port = process.env.PORT;
+const imageURL = process.env.imageURL;
+const secret = process.env.secret;
+
+// Configure CORS
 server.use(cors({
-    origin: 'http://localhost:3000',
+    origin: corsOrigin,
 }));
+
+console.log(secret);
 
 server.use('/Public', staticMiddleware);
 server.use(ecommerceConnectMiddleWare);
@@ -28,7 +40,7 @@ server.get('/api/products', async (req, res) => {
             color: product.color,
             imgName: product.imgName,
             description: product.description,
-            imageURL: 'http://localhost:8080/Public/' + product.category + '/' + product.imgName + '.png'
+            imageURL: imageURL + product.category + '/' + product.imgName + '.png'
         }));
         res.json(productsWithImageURLs);
     } catch (err) {
@@ -36,11 +48,6 @@ server.get('/api/products', async (req, res) => {
         res.status(500).json({ error: "Error fetching products" });
     }
 });
-
-// Function to generate a random secret key using built-in Node.js crypto module
-const generateSecretKey = () => {
-    return require('crypto').randomBytes(32).toString('hex');
-};
 
 server.post('/Register', async (req, res) => {
     try {
@@ -56,9 +63,6 @@ server.post('/Register', async (req, res) => {
         const newUser = new User({ email, password: hashedPassword, username });
         await newUser.save();
 
-        // Generate a random secret key
-        const secret = generateSecretKey();
-
         const token = jwt.sign({ id: newUser._id }, secret, { expiresIn: '1h' });
 
         res.cookie('token', token, { httpOnly: true, secure: true });
@@ -69,6 +73,6 @@ server.post('/Register', async (req, res) => {
     }
 });
 
-server.listen(8080, () => {
-    console.log("Server listening on port 8080");
+server.listen(port, () => {
+    console.log(`Server listening on port ${port}`);
 });
