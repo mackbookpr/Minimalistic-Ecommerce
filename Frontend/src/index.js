@@ -1,22 +1,17 @@
 import './App.css';
-import { createRoot } from 'react-dom/client';
+import ReactDOM from 'react-dom';
 import React from 'react';
-import { Auth0Provider } from '@auth0/auth0-react';
 import App from './App';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 import reportWebVitals from './reportWebVitals';
 
-const root = createRoot(document.getElementById('root'));
-
-root.render(
-  <Auth0Provider
-    domain="dev-c4kefl5b4yqln0kd.us.auth0.com"
-    clientId="ASyy91F5UbqmVymYAXtjsxezRhjbBzV1"
-    authorizationParams={{
-      redirect_uri: window.location.origin
-    }}
-  >
-    <App />
-  </Auth0Provider>,
+ReactDOM.render(
+  <React.StrictMode>
+    <GoogleOAuthProvider clientId="104904990675-fcnmsj8l538om09mekdno3bij7pvo0g9.apps.googleusercontent.com">
+      <App />
+    </GoogleOAuthProvider>
+  </React.StrictMode>,
+  document.getElementById('root')
 );
 
 reportWebVitals();

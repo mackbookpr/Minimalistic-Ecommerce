@@ -102,7 +102,7 @@ function Navbar() {
     };
 
     return (
-        (location.pathname !== '/Register') ? (
+        (location.pathname !== '/Register' && location.pathname !== '/LoginPage') ? (
             <section className='fixed top-0 w-full bg-white z-50'>
                 <section className='xl:max-w-[1265px] lg:max-w-[1035px] md:max-w-[830px] m-auto shadow-lg py-3 flex items-center justify-between h-[70px] gap-10 px-12 bg-white relative'>
                     <h1 className={`text-lg text-orange-400 font-bold md:text-2xl`}><Link to="/">Minimalistic Ecommerce</Link></h1>

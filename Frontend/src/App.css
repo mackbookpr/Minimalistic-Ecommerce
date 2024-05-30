@@ -46,3 +46,7 @@ img:hover{
 .slick-arrow{
   width:10px;
 }
+
+.shadow{
+  box-shadow: 0 0 20px rgba(239, 176, 33, 0.5); /* Use the rgba() color corresponding to bg-orange-300 */
+}
