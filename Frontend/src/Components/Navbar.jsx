@@ -1,41 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaSearch } from "react-icons/fa";
 import { Link, useLocation } from 'react-router-dom';
 import { CiShoppingCart } from "react-icons/ci";
 import { RxCross1 } from "react-icons/rx";
-import { useEffect } from 'react';
-import { useCart } from '../CartContext';
-import Login from "../Components/Login";
-import Logout from "../Components/Logout";
-import RegisterationPage from "../Components/RegisterationPage";
-import LoginPage from "../Components/LoginPage";
-import { useAuth0 } from "@auth0/auth0-react";
+import { useAuth } from '../authContext';
 
-function Navbar() {
-    const { cartItems, updateCartItemQuantity, removeFromCart } = useCart();
-    const { isAuthenticated } = useAuth0();
+const Navbar = () => {
+    const { userID } = useAuth();
     const location = useLocation();
 
-    const handleRemovalShoppingCart = (ID) => {
-        removeFromCart(ID);
-    }
-
     const texts = ['Furniture Items', 'Kitchen Items', 'Skincare Items', 'Electronics Products'];
-    const totalQuantity = cartItems.reduce((total, item) => total + item.Quantity, 0);
+    const typingSpeed = 50;
 
     const [shoppingCart, setShoppingCart] = useState(false);
     const [cartWidth, setCartWidth] = useState(0);
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [typedText, setTypedText] = useState('');
+    const [isDeleting, setIsDeleting] = useState(false);
+    const [searchInput, setSearchInput] = useState("");
+    const [filteredItems, setFilteredItems] = useState([]);
 
     const toggleShoppingCart = () => {
         setShoppingCart(!shoppingCart);
         setCartWidth(shoppingCart ? 0 : 'auto');
-    }
-
-    const typingSpeed = 50;
-
-    const [currentIndex, setCurrentIndex] = useState(0);
-    const [typedText, setTypedText] = useState('');
-    const [isDeleting, setIsDeleting] = useState(false);
+    };
 
     useEffect(() => {
         const currentText = texts[currentIndex];
@@ -71,19 +59,6 @@ function Navbar() {
 
     }, [typedText, currentIndex, isDeleting]);
 
-    const handleIncrementQuantity = (id) => {
-        updateCartItemQuantity(id, 1); // Increment quantity by 1
-    };
-
-    const handleDecrementQuantity = (id, quantity) => {
-        if (quantity >= 2) {
-            updateCartItemQuantity(id, -1); // Decrement quantity by 1
-        }
-    };
-
-    const [searchInput, setSearchInput] = useState("");
-    const [filteredItems, setFilteredItems] = useState([]);
-
     const handleInputChange = (e) => {
         const inputValue = e.target.value;
         setSearchInput(inputValue);
@@ -95,10 +70,10 @@ function Navbar() {
 
         if (firstCharFilteredItems.length === 0) return [];
 
-        const FilteredItems = firstCharFilteredItems.filter(item => {
+        const filteredItems = firstCharFilteredItems.filter(item => {
             return item.toLowerCase().includes(inputValue.toLowerCase());
         });
-        setFilteredItems(FilteredItems);
+        setFilteredItems(filteredItems);
     };
 
     return (
@@ -114,52 +89,26 @@ function Navbar() {
                                 {searchInput && (
                                     <div className="absolute bg-orange-100 w-full -bottom-4 left-0 translate-y-1/2 shadow-md">
                                         {filteredItems.map((item, index) => (
-                                            <Link to={`/${filteredItems[0].split(' ')[0]}`}><div key={index} className="px-4 py-1 cursor-pointer">{item}</div></Link>
+                                            <Link to={`/${filteredItems[0].split(' ')[0]}`} key={index}><div className="px-4 py-1 cursor-pointer">{item}</div></Link>
                                         ))}
                                     </div>
                                 )}
                             </div>
+                            {/* {userID ? <h1>Hello {userID}</h1> : <h1></h1>} */}
                             <Link to="/Register" className='py-1 px-1.5 bg-orange-300 text-white rounded-md'>Register</Link>
-                            {/* <Link to="/LoginPage" className='py-1 px-1.5 bg-orange-300 text-white rounded-md'>Login<LoginPage /></Link> */}
+                            <Link to="/LoginPage" className='py-1 px-1.5 bg-orange-300 text-white rounded-md'>Login</Link>
                             <div className='relative'>
                                 <button><CiShoppingCart size={32} color='orange' onClick={toggleShoppingCart} /></button>
-                                <h1 className='absolute -top-2 -right-2'>{totalQuantity}</h1>
                             </div>
                         </div>
                     </div>
                     {shoppingCart && (
                         <div className="right-0 absolute w-auto top-0 h-[100vh] bg-orange-50 px-5 flex flex-col justify-between z-20 xl:max-w-[1265px] lg:max-w-[1035px] md:max-w-[830px]" style={{ width: cartWidth, transition: 'width 5s' }}>
                             <div className="flex justify-between py-5">
-                                <h1 className='text-xl'>Your Shopping Cart ({totalQuantity})</h1>
                                 <button className="text-xl" onClick={toggleShoppingCart}><RxCross1 /></button>
                             </div>
                             <div className='overflow-y-scroll flex-col flex gap-5'>
-                                {cartItems.map(item => (
-                                    <div className="flex items-center justify-center">
-                                        <div className="w-1/3 relative">
-                                            <img
-                                                src={"http://localhost:8080/Public/" + item.category + "/" + item.imgName + ".png"}
-                                                className="object-cover h-[130px] w-[130px] border-2 border-gray-500 hover:border-black"
-                                                alt=""
-                                            />
-                                        </div>
-                                        <div className="flex flex-col justify-center w-2/3 gap-5">
-                                            <div className="flex gap-5 justify-between px-7">
-                                                <h1 className='md:text-md text-sm font-bold'>Quantity</h1>
-                                                <button className=' bg-black text-white px-2 py-1' onClick={() => handleDecrementQuantity(item.id, item.Quantity)}>-</button>
-                                                <h1 className='flex items-center justify-center'>{item.Quantity}</h1>
-                                                <button className='px-1 py-1 bg-black text-white' onClick={() => handleIncrementQuantity(item.id)}>+</button>
-                                            </div>
-                                            <div className="flex justify-between">
-                                                <h1 className='flex justify-start px-7'>&#x20B9;{item.cost}</h1>
-                                                <button className="text-md px-7" onClick={() => handleRemovalShoppingCart(item.id)}><RxCross1 /></button>
-                                            </div>
-                                            <div>
-                                                <h1 className='px-7'>{item.productName}</h1>
-                                            </div>
-                                        </div>
-                                    </div>
-                                ))}
+                                {/* Cart items rendering logic here */}
                             </div>
                             <div className='flex justify-between py-5 gap-5'>
                                 <button className='rounded-xl bg-orange-400 py-2 px-3 text-md' onClick={toggleShoppingCart}>Continue Browsing</button>

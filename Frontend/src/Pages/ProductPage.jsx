@@ -1,41 +1,87 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { useHistory } from 'react-router-dom';
-import { useCart } from "../CartContext";
 import axios from 'axios';
-import { v4 as uuidv4 } from 'uuid';
 import { useMediaQuery } from 'react-responsive';
 import Trending from "../Components/Trending";
 import Newsletter from "../Components/Newsletter";
 import Footer from "../Components/Footer";
 import Categories from '../Components/Categories';
+import { useAuth } from '../authContext';
 
 function ProductPage() {
 
     const [products, setProducts] = useState([]);
     const { ID } = useParams();
+    const [Quantity, setQuantity] = useState(1);
+    const [cost, setCost] = useState();
+    const { userID } = useAuth();
+    const [price, setPrice] = useState();
+
+    const increment = () => {
+        setQuantity(prev => prev + 1);
+    }
+    const decrement = () => {
+        Quantity >= 2 ? setQuantity(prev => prev - 1) : setQuantity(prev => prev);
+    }
+
+    useEffect(() => {
+        setCost(Quantity * price);
+    }, [price,Quantity]);
+
+    const handleAddToCart = async (product) => {
+        try {
+            const response = await axios.post('http://localhost:8080/cart/add', {
+                userId: userID,
+                productId: product.id,
+                quantity: Quantity,
+                price: product.price, // Assuming product.price contains the price of the product
+                imgUrl: product.imageURL
+            });
+        } catch (error) {
+            console.error('Error adding to cart:', error);
+        }
+    };
+    
+    
+
+    // const handleRemoveFromCart = async (productId) => {
+    //     try {
+    //         const response = await axios.delete('http://localhost:8080/api/cart/remove', {
+    //             data: {
+    //                 userId: 1, // replace with actual user ID
+    //                 productId: productId
+    //             }
+    //         });
+    //         console.log('Item removed from cart:', response.data);
+    //     } catch (error) {
+    //         console.error('Error removing from cart:', error);
+    //     }
+    // };
 
     useEffect(() => {
         async function fetchProducts() {
             try {
                 const response = await axios.get('http://localhost:8080/api/products');
                 setProducts(response.data.filter(product => product.id.toString() === ID));
+                setPrice(price);
             } catch (error) {
                 console.error('Error fetching products:', error);
             }
         }
 
         fetchProducts();
-    }, [ID]);
-
-    const { addToCart } = useCart();
-    const [Quantity, setQuantity] = useState(1);
-    const [cost, setCost] = useState(10000);
-    const [Background, setBackground] = useState('');
+    }, [ID,products]);
 
     useEffect(() => {
-        setCost(Quantity * 10000);
-    }, [Quantity]);
+        if (products.length > 0) {
+            const { price } = products[0];
+            setPrice(price);
+        }
+    }, [products]);
+
+
+    const [Background, setBackground] = useState('');
+
 
     function scrollToTop() {
         window.scrollTo(0, 0);
@@ -44,27 +90,6 @@ function ProductPage() {
     useEffect(() => {
         scrollToTop();
     }, [ID]);
-
-    const increment = () => {
-        setQuantity(prev => prev + 1);
-    };
-
-    const decrement = () => {
-        setQuantity(prev => prev >= 2 ? prev - 1 : prev);
-    };
-
-    const handleAddToCart = () => {
-        addToCart({
-            id: uuidv4(),
-            name: 'BlackByte Computer',
-            price: 9000,
-            category: 'Electronics',
-            Quantity: Quantity,
-            imgName: 'BlackComputer',
-            cost: cost,
-            productName: "ShadowTech PC"
-        });
-    };
 
     const handleMouseEnter = () => {
         setBackground('#FB923C');
@@ -82,11 +107,11 @@ function ProductPage() {
             <Categories />
             {
                 products.map((product) => (
-                    <div key = {product.id} className='pt-[8rem]'>
+                    <div key={product.id} className='pt-[8rem]'>
                         <h1 className='absolute lg:text-5xl md:text-2xl font-bold flex left-1/2 justify-center -translate-x-1/2 z-10 '>{product.name}</h1>
                         <div className={`${containerClass} gap-5`}>
                             <div className="lg:w-1/2 w-full mt-16 lg:mb-8 mb-2 relative md:h-[550px] lg:h-[380px] h-[400px]">
-                                <img src={"http://localhost:8080/Public/" + product.category + "/" + product.imgName + ".png"} alt="" className='w-full h-full object-cover border-2 border-black' />
+                                <img src={product.imageURL} alt="" className='w-full h-full object-cover border-2 border-black' />
                             </div>
                             <div className="lg:w-1/2 w-full bg-orange-200 lg:py-40 py-10 h-auto px-2 flex text-lg flex-col gap-10 border border-black lg:h-[440px] justify-center">
                                 <p className='sm:text-left text-center'>{product.description}</p>
@@ -102,7 +127,7 @@ function ProductPage() {
                                 </div>
 
                                 <div className="flex justify-between">
-                                    <button className='xl:py-2 xl:px-20 lg:px-12 lg:py-1 border py-2 px-3 border-black' onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} style={{ background: Background }} onClick={handleAddToCart}>Add to Cart</button>
+                                    <button className='xl:py-2 xl:px-20 lg:px-12 lg:py-1 border py-2 px-3 border-black' onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} style={{ background: Background }} onClick={()=>handleAddToCart(product)}>Add to Cart</button>
                                     <button className='xl:py-2 xl:px-20 lg:px-12 lg:py-1 px-3 py-2 border border-black bg-orange-400'>Buy Now</button>
                                     <div>{product.weight}</div>
                                 </div>

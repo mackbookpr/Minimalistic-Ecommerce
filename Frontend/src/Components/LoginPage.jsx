@@ -4,7 +4,7 @@ import { GoogleLogin } from '@react-oauth/google';
 import { Link } from 'react-router-dom';
 
 const Register = () => {
-  const [Status, setStatus] = useState(0);
+  const [Status, setStatus] = useState(200);
   const [statusMessage, setStatusMessage] = useState('');
   const [formData, setFormData] = useState({
     email: '',
@@ -17,26 +17,31 @@ const Register = () => {
   };
 
   useEffect(() => {
+    // Check if Status is 401
+    if (Status === 401) {
+      setStatusMessage("User doesn't exist with the provided email!");
+    }
+
+    // Reset Status after 1 second
     if (Status !== 0) {
       const timer = setTimeout(() => {
-        setStatus(0);
+        setStatus(200);
       }, 1000);
       return () => clearTimeout(timer);
     }
   }, [Status]);
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8080/Register', formData);
+      const response = await axios.post('http://localhost:8080/Login', formData);
       setStatus(response.status);
-      setStatusMessage("User Registered Successfully");
       // console.log(response.data); // Log response from the backend
       // Optionally, you can handle the response data here (e.g., display success message)
     } catch (error) {
       // Log any errors from the backend
       setStatus(error.response.status);
-      setStatusMessage("User already exists");
       // Optionally, you can handle errors here (e.g., display error message to the user)
     }
   };
@@ -63,10 +68,10 @@ const Register = () => {
               )}
             />
           </div>
-          <button className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline" type="submit">Register</button>
+          <button className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline" type="submit">Log In</button>
         </form>
       </div>
-      <div className={`absolute py-2 px-5 ${Status === 0 ? '-top-12' : 'top-20'} transition-all duration-500 bg-orange-300 rounded-md`}>{statusMessage}</div>
+      <div className={`absolute py-2 px-5 ${(Status === 200) ? '-top-12' : 'top-20'} transition-all duration-500 bg-orange-300 rounded-md`}>{statusMessage}</div>
     </div>
   );
 };

@@ -1,11 +1,11 @@
+require('dotenv').config();
 const mongoose = require('mongoose');
+
+const url = process.env.dbURL;
 
 async function ecommerceConnectMiddleWare(req, res, next) {
     try {
-        await mongoose.connect('mongodb://127.0.0.1:27017/Ecommerce', {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-        });
+        await mongoose.connect(url);
         next();
     } catch (err) {
         console.error("Error during database connection or updating products:", err);

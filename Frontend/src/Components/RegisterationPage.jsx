@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 const Register = () => {
   const [Status, setStatus] = useState(0);
   const [statusMessage, setStatusMessage] = useState('');
+  const [cookies, setCookies] = useState('');
   const [formData, setFormData] = useState({
     email: '',
     username: '',
@@ -28,14 +29,14 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8080/Register', formData);
+      const response = await axios.post('http://localhost:8080/Register', formData, {
+        withCredentials: true
+      });
       setStatus(response.status);
       setStatusMessage("User Registered Successfully");
-      // console.log(response.data); // Log response from the backend
       // Optionally, you can handle the response data here (e.g., display success message)
     } catch (error) {
-      // Log any errors from the backend
-      setStatus(error.response.status);
+      // setStatus(error.response.status);
       setStatusMessage("User already exists");
       // Optionally, you can handle errors here (e.g., display error message to the user)
     }
