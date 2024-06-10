@@ -81,26 +81,26 @@ server.post('/Register', async (req, res) => {
         res.status(500).send({ message: err.message });
     }
 });
-server.post('/Login', async (req, res) => {
+server.post('/LoginPage', async (req, res) => {
     try {
         const { email, password } = req.body;
 
-        const user = await User.findOne({ email });
+        const newUser = await User.findOne({ email });
 
         // Check if the user exists
-        if (!user) {
+        if (!newUser) {
             return res.status(401).send({ message: "User doesn't exist with the provided email!" });
         }
 
         // Check if the password is valid
-        const isPasswordValid = await bcrypt.compare(password, user.password);
+        const isPasswordValid = await bcrypt.compare(password, newUser.password);
 
         if (!isPasswordValid) {
             return res.status(401).send({ message: "Incorrect password!" });
         }
 
         // If both email and password are correct, generate JWT token
-        const tokenn = jwt.sign({ id: user._id }, secret, { expiresIn: '2d' });
+        const tokenVal = jwt.sign({ id: newUser._id }, secret, { expiresIn: '2d' });
 
         const options = {
             expires: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000),
@@ -108,43 +108,93 @@ server.post('/Login', async (req, res) => {
         }
 
         // Set the token in a cookie
-        res.cookie('token', tokenn, options);
+        res.cookie('token', tokenVal, options);
 
         // Send a success message if login is successful
-        res.status(200).send({ message: "Login successful" });
+        res.status(200).send(tokenVal);
     } catch (err) {
         res.status(500).send({ message: err.message });
     }
 });
 
-server.get('/', async (req, res) => {
-    const Token = req.cookies.token;
+// server.post('/googleLogin', async (req, res) => {
+//     try {
+//         const { token } = req.body;
 
-    if (!Token) {
-        res.json({ valid: false });
-    }
-    else {
-        try {
-            const decoded = jwt.decode(Token);
-            if (decoded) {
-                const { id } = decoded;
-                const userr = await User.findOne({ _id: id });
-                const { username } = userr;
-                res.json({ valid: true, username, id });
-            }
-            else {
-                res.json({ valid: false });
-            }
+//         // Verify the Google OAuth token
+//         const response = await axios.get(`https://oauth2.googleapis.com/tokeninfo?id_token=${token}`);
+//         const { aud, email, name } = response.data;
+
+//         // Check if the token audience matches your Google OAuth client ID
+//         if (aud !== 'YOUR_GOOGLE_OAUTH_CLIENT_ID') {
+//             return res.status(401).json({ error: 'Invalid token audience' });
+//         }
+
+//         // Extract user information
+//         const userInfo = { email, name };
+
+//         // Generate JWT token
+//         const accessToken = jwt.sign(userInfo, 'your-secret-key', { expiresIn: '1h' });
+
+//         // Set the JWT token as a cookie
+//         res.cookie('accessToken', accessToken, { httpOnly: true });
+
+//         // Send JWT token to the client
+//         res.json({ accessToken });
+//     } catch (error) {
+//         console.error('Google login error:', error);
+//         res.status(500).json({ error: 'Internal server error' });
+//     }
+// });
+
+server.post('/logout', (req, res) => {
+    res.clearCookie('token');
+    res.status(200).send({ message: 'Logout successful' });
+});
+
+server.get('/', async (req, res) => {
+    try {
+        // Get the token from the request cookies
+        const token = req.cookies.token;
+
+        // Check if the token exists
+        if (!token) {
+            return res.json({ valid: false });
         }
-        catch (err) {
-            res.json({ err: err.message });
+
+        // Verify and decode the token
+        const decoded = jwt.verify(token, secret);
+
+        // Check if decoding was successful
+        if (decoded) {
+            // Extract user ID from the decoded token
+            const { id } = decoded;
+
+            // Find the user in the database using the user ID
+            const user = await User.findById(id);
+
+            // Check if the user exists
+            if (user) {
+                const { username } = user;
+                return res.json({ valid: true, username, id });
+            } else {
+                // User not found
+                return res.json({ valid: false });
+            }
+        } else {
+            // Invalid token
+            return res.json({ valid: false });
         }
+    } catch (err) {
+        // Handle any errors
+        console.error("Error:", err.message);
+        return res.status(500).json({ error: "Internal server error" });
     }
 });
 
 // Backend Logic
 server.post('/cart/add', async (req, res) => {
-    const { userId, productId, quantity, price, imgUrl } = req.body;
+    const { Name, userId, productId, quantity, price, imgUrl } = req.body;
     try {
         let cart = await Cart.findOne({ userID: userId });
         if (!cart) {
@@ -159,7 +209,7 @@ server.post('/cart/add', async (req, res) => {
             cart.cartItems[existingProductIndex].quantity += quantity;
         } else {
             // If the product does not exist, add it to the cart
-            cart.cartItems.push({ productId, quantity, price, imgUrl });
+            cart.cartItems.push({ Name, productId, quantity, price, imgUrl });
         }
 
         await cart.save();
@@ -173,12 +223,16 @@ server.get('/cart/:userId', async (req, res) => {
     const { userId } = req.params;
     try {
         // Find the cart for the given user ID
-        const cart = await Cart.find({ ID: userId });
+        const cart = await Cart.findOne({ userID: userId });
 
         if (cart) {
-            // If cart exists, return the cart items
-            console.log(cart);
-            res.status(200).json(cart);
+            cartsObject = cart.toObject();
+            cartsObject = cartsObject.cartItems;
+            let quantity = 0;
+            cartsObject.map((item) => {
+                quantity += item.quantity;
+            })
+            res.status(200).json({ cartsObject, quantity });
         } else {
             // If cart does not exist, return a 404 status with a message
             res.status(404).json({ message: 'Cart not found' });

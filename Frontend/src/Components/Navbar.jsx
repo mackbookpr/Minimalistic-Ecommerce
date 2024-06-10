@@ -1,13 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { FaSearch } from "react-icons/fa";
+import Avatar from 'react-avatar';
 import { Link, useLocation } from 'react-router-dom';
 import { CiShoppingCart } from "react-icons/ci";
 import { RxCross1 } from "react-icons/rx";
+import { FaRegTrashCan } from "react-icons/fa6";
 import { useAuth } from '../authContext';
+import { useCart } from '../CartContext';
+import axios from 'axios';
 
 const Navbar = () => {
-    const { userID } = useAuth();
+    const { userID, username, setUserID, setUserName } = useAuth();
+    const { itemsAdded, setItemsAdded, itemsRemoved, setItemsRemoved, cartItems, setCartItems, quantity, setQuantity, cost, setCost } = useCart();
     const location = useLocation();
+
 
     const texts = ['Furniture Items', 'Kitchen Items', 'Skincare Items', 'Electronics Products'];
     const typingSpeed = 50;
@@ -59,6 +65,16 @@ const Navbar = () => {
 
     }, [typedText, currentIndex, isDeleting]);
 
+    const handleLogOut = async () => {
+        try {
+            await axios.post('http://localhost:8080/logout', {}, { withCredentials: true });
+            setUserName(null);
+            setUserID(null);
+        } catch (error) {
+            console.error('Error logging out:', error);
+        }
+    };
+
     const handleInputChange = (e) => {
         const inputValue = e.target.value;
         setSearchInput(inputValue);
@@ -94,32 +110,58 @@ const Navbar = () => {
                                     </div>
                                 )}
                             </div>
-                            {/* {userID ? <h1>Hello {userID}</h1> : <h1></h1>} */}
-                            <Link to="/Register" className='py-1 px-1.5 bg-orange-300 text-white rounded-md'>Register</Link>
-                            <Link to="/LoginPage" className='py-1 px-1.5 bg-orange-300 text-white rounded-md'>Login</Link>
+                            {userID && <h1>Hello {username}</h1>}
+                            {userID && (
+                                <button>
+                                    <Avatar name={`${username}`} round="50px" size="40px" />
+                                </button>
+                            )}
+                            {!userID && <Link to="/Register" className='py-1 px-1.5 bg-orange-300 text-white rounded-md'>Register</Link>}
+                            {!userID && <Link to="/LoginPage" className='py-1 px-1.5 bg-orange-300 text-white rounded-md'>Login</Link>}
+                            {userID && <button className='py-1 px-1.5 bg-orange-300 text-white rounded-md' onClick={handleLogOut}>Log Out</button>}
                             <div className='relative'>
                                 <button><CiShoppingCart size={32} color='orange' onClick={toggleShoppingCart} /></button>
+                                {userID && <h1 className='absolute -right-5 -top-3'>{quantity}</h1>}
                             </div>
                         </div>
+
+                        {shoppingCart && (
+                            <div className="right-0 text-black absolute w-auto top-0 h-[100vh] bg-orange-50 px-5 flex flex-col justify-between z-20 xl:max-w-[1265px] lg:max-w-[1035px] md:max-w-[830px]" style={{ width: cartWidth, transition: 'width 5s' }}>
+                                <div className="flex py-5">
+                                    <button className="text-xl" onClick={toggleShoppingCart}><RxCross1 /></button>
+                                </div>
+                                <div className='overflow-y-scroll flex-col flex gap-5'>
+                                    {
+                                        cartItems.map(item => (
+                                            <div id={item.key} className='flex gap-5'>
+                                                <img src={item.imgUrl} className="h-[90px] w-[90px] object-cover" alt="" />
+                                                <div className="flex flex-col items-start gap-2">
+                                                    <div className="flex justify-between w-full">
+                                                        <h1>{item.Name}</h1>
+                                                        <button className="text-lg"><FaRegTrashCan /></button>
+                                                    </div>
+                                                    <div className='flex gap-2'>
+                                                        <h1 className='text-md'>Quantity</h1>
+                                                        <button className='py-1 px-2 bg-black text-white text-sm rounded-full'>-</button>
+                                                        <h1 className='flex justify-center items-center w-[3em]'>{item.quantity}</h1>
+                                                        <button className='py-1 px-1.5 rounded-full bg-black text-white text-sm'>+</button>
+                                                    </div>
+                                                    <h1>&#x20B9;{cost}</h1>
+                                                </div>
+                                            </div>
+                                        ))}
+                                </div>
+                                <div className='flex justify-between py-5 gap-5'>
+                                    <button className='rounded-xl bg-orange-400 py-2 px-3 text-md' onClick={toggleShoppingCart}>Continue Browsing</button>
+                                    <button className='px-3 py-2 text-md rounded-xl bg-orange-400'>Checkout Items</button>
+                                </div>
+                            </div>
+                        )}
                     </div>
-                    {shoppingCart && (
-                        <div className="right-0 absolute w-auto top-0 h-[100vh] bg-orange-50 px-5 flex flex-col justify-between z-20 xl:max-w-[1265px] lg:max-w-[1035px] md:max-w-[830px]" style={{ width: cartWidth, transition: 'width 5s' }}>
-                            <div className="flex justify-between py-5">
-                                <button className="text-xl" onClick={toggleShoppingCart}><RxCross1 /></button>
-                            </div>
-                            <div className='overflow-y-scroll flex-col flex gap-5'>
-                                {/* Cart items rendering logic here */}
-                            </div>
-                            <div className='flex justify-between py-5 gap-5'>
-                                <button className='rounded-xl bg-orange-400 py-2 px-3 text-md' onClick={toggleShoppingCart}>Continue Browsing</button>
-                                <button className='px-3 py-2 text-md rounded-xl bg-orange-400'>Checkout Items</button>
-                            </div>
-                        </div>
-                    )}
                 </section>
             </section>
         ) : null
     );
-}
+};
 
 export default Navbar;

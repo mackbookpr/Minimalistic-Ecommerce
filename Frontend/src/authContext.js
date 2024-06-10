@@ -1,15 +1,14 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const AuthContext = createContext();  // Use PascalCase for context
+const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
     const [userID, setUserID] = useState(null);
-    const[username,setUserName] = useState(null);
+    const [username, setUserName] = useState(null);
 
     useEffect(() => {
-        async function fetchID() {
+        const fetchID = async () => {
             try {
                 const response = await axios.get('http://localhost:8080', {
                     withCredentials: true
@@ -20,22 +19,22 @@ export const AuthProvider = ({ children }) => {
                 } else {
                     setUserID(null);
                 }
+                console.log(response.data.id);
             } catch (error) {
                 console.error('Error fetching user ID:', error);
                 setUserID(null);
             }
-        }
-
+        };
         fetchID();
     }, []);
 
     return (
-        <AuthContext.Provider value={{ userID }}>
+        <AuthContext.Provider value={{ userID, username, setUserID, setUserName }}>
             {children}
         </AuthContext.Provider>
     );
 };
 
 export const useAuth = () => {
-    return useContext(AuthContext);  // Return the context value
+    return useContext(AuthContext);
 };

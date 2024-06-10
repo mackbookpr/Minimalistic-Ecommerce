@@ -7,6 +7,7 @@ import Newsletter from "../Components/Newsletter";
 import Footer from "../Components/Footer";
 import Categories from '../Components/Categories';
 import { useAuth } from '../authContext';
+import { useCart } from '../CartContext';
 
 function ProductPage() {
 
@@ -16,6 +17,8 @@ function ProductPage() {
     const [cost, setCost] = useState();
     const { userID } = useAuth();
     const [price, setPrice] = useState();
+    const [message, setMessage] = useState("");
+    const { itemsAdded, setItemsAdded } = useCart();
 
     const increment = () => {
         setQuantity(prev => prev + 1);
@@ -26,23 +29,48 @@ function ProductPage() {
 
     useEffect(() => {
         setCost(Quantity * price);
-    }, [price,Quantity]);
+    }, [price, Quantity]);
 
     const handleAddToCart = async (product) => {
-        try {
-            const response = await axios.post('http://localhost:8080/cart/add', {
-                userId: userID,
-                productId: product.id,
-                quantity: Quantity,
-                price: product.price, // Assuming product.price contains the price of the product
-                imgUrl: product.imageURL
-            });
-        } catch (error) {
-            console.error('Error adding to cart:', error);
+        if (userID) {
+            try {
+                const response = await axios.post('http://localhost:8080/cart/add', {
+                    Name: product.name,
+                    userId: userID,
+                    productId: product.id,
+                    quantity: Quantity,
+                    price: product.price,
+                    imgUrl: product.imageURL
+                });
+                console.log(response.data);
+                if (response.status === 200) {
+                    setItemsAdded(true);
+                    const timer = setTimeout(() => {
+                        setItemsAdded(false);
+                    }, 10);
+                    return () => clearTimeout(timer);
+                } else {
+                    console.error('Error adding to cart:', response.data);
+                }
+            } catch (error) {
+                console.error('Error adding to cart:', error);
+            }
+        } else {
+            setMessage("Please Log In first!");
+            setItemsAdded(true);
+            const timer = setTimeout(() => {
+                setItemsAdded(false);
+            }, 1000);
+            return () => clearTimeout(timer);
         }
     };
-    
-    
+
+
+    useEffect(() => {
+        setItemsAdded(false);
+    }, [])
+
+
 
     // const handleRemoveFromCart = async (productId) => {
     //     try {
@@ -70,7 +98,7 @@ function ProductPage() {
         }
 
         fetchProducts();
-    }, [ID,products]);
+    }, [ID, products]);
 
     useEffect(() => {
         if (products.length > 0) {
@@ -127,7 +155,7 @@ function ProductPage() {
                                 </div>
 
                                 <div className="flex justify-between">
-                                    <button className='xl:py-2 xl:px-20 lg:px-12 lg:py-1 border py-2 px-3 border-black' onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} style={{ background: Background }} onClick={()=>handleAddToCart(product)}>Add to Cart</button>
+                                    <button className='xl:py-2 xl:px-20 lg:px-12 lg:py-1 border py-2 px-3 border-black' onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} style={{ background: Background }} onClick={() => handleAddToCart(product)}>Add to Cart</button>
                                     <button className='xl:py-2 xl:px-20 lg:px-12 lg:py-1 px-3 py-2 border border-black bg-orange-400'>Buy Now</button>
                                     <div>{product.weight}</div>
                                 </div>
@@ -142,6 +170,7 @@ function ProductPage() {
                         <Trending />
                         <Newsletter />
                         <Footer />
+                        <div className={`absolute left-1/2 -translate-x-1/2 z-50 py-2 px-5 ${itemsAdded === false ? '-top-12 opacity-0' : 'top-32'} transition-all duration-1000 bg-orange-300 rounded-md`}>{message}</div>
                     </div>
                 ))
             }
