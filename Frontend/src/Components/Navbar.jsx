@@ -3,23 +3,20 @@ import { FaSearch } from "react-icons/fa";
 import Avatar from 'react-avatar';
 import { Link, useLocation } from 'react-router-dom';
 import { CiShoppingCart } from "react-icons/ci";
-import { RxCross1 } from "react-icons/rx";
-import { FaRegTrashCan } from "react-icons/fa6";
 import { useAuth } from '../authContext';
 import { useCart } from '../CartContext';
 import axios from 'axios';
+import Cart from './Cart';
 
 const Navbar = () => {
     const { userID, username, setUserID, setUserName } = useAuth();
-    const { itemsAdded, setItemsAdded, itemsRemoved, setItemsRemoved, cartItems, setCartItems, quantity, setQuantity, cost, setCost } = useCart();
+    const { setItemsRemoved, cartItems, setItemsAdded, quantity, setQuantity, calculateTotalCost } = useCart();
     const location = useLocation();
-
 
     const texts = ['Furniture Items', 'Kitchen Items', 'Skincare Items', 'Electronics Products'];
     const typingSpeed = 50;
 
     const [shoppingCart, setShoppingCart] = useState(false);
-    const [cartWidth, setCartWidth] = useState(0);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [typedText, setTypedText] = useState('');
     const [isDeleting, setIsDeleting] = useState(false);
@@ -28,7 +25,6 @@ const Navbar = () => {
 
     const toggleShoppingCart = () => {
         setShoppingCart(!shoppingCart);
-        setCartWidth(shoppingCart ? 0 : 'auto');
     };
 
     useEffect(() => {
@@ -92,8 +88,10 @@ const Navbar = () => {
         setFilteredItems(filteredItems);
     };
 
+    const pathNames = ['/Register','/LoginPage','/checkout','/OrderDetails'];
+
     return (
-        (location.pathname !== '/Register' && location.pathname !== '/LoginPage') ? (
+        (!pathNames.includes(location.pathname)) ? (
             <section className='fixed top-0 w-full bg-white z-50'>
                 <section className='xl:max-w-[1265px] lg:max-w-[1035px] md:max-w-[830px] m-auto shadow-lg py-3 flex items-center justify-between h-[70px] gap-10 px-12 bg-white relative'>
                     <h1 className={`text-lg text-orange-400 font-bold md:text-2xl`}><Link to="/">Minimalistic Ecommerce</Link></h1>
@@ -126,36 +124,7 @@ const Navbar = () => {
                         </div>
 
                         {shoppingCart && (
-                            <div className="right-0 text-black absolute w-auto top-0 h-[100vh] bg-orange-50 px-5 flex flex-col justify-between z-20 xl:max-w-[1265px] lg:max-w-[1035px] md:max-w-[830px]" style={{ width: cartWidth, transition: 'width 5s' }}>
-                                <div className="flex py-5">
-                                    <button className="text-xl" onClick={toggleShoppingCart}><RxCross1 /></button>
-                                </div>
-                                <div className='overflow-y-scroll flex-col flex gap-5'>
-                                    {
-                                        cartItems.map(item => (
-                                            <div id={item.key} className='flex gap-5'>
-                                                <img src={item.imgUrl} className="h-[90px] w-[90px] object-cover" alt="" />
-                                                <div className="flex flex-col items-start gap-2">
-                                                    <div className="flex justify-between w-full">
-                                                        <h1>{item.Name}</h1>
-                                                        <button className="text-lg"><FaRegTrashCan /></button>
-                                                    </div>
-                                                    <div className='flex gap-2'>
-                                                        <h1 className='text-md'>Quantity</h1>
-                                                        <button className='py-1 px-2 bg-black text-white text-sm rounded-full'>-</button>
-                                                        <h1 className='flex justify-center items-center w-[3em]'>{item.quantity}</h1>
-                                                        <button className='py-1 px-1.5 rounded-full bg-black text-white text-sm'>+</button>
-                                                    </div>
-                                                    <h1>&#x20B9;{cost}</h1>
-                                                </div>
-                                            </div>
-                                        ))}
-                                </div>
-                                <div className='flex justify-between py-5 gap-5'>
-                                    <button className='rounded-xl bg-orange-400 py-2 px-3 text-md' onClick={toggleShoppingCart}>Continue Browsing</button>
-                                    <button className='px-3 py-2 text-md rounded-xl bg-orange-400'>Checkout Items</button>
-                                </div>
-                            </div>
+                            <Cart shoppingCart={shoppingCart} setShoppingCart={setShoppingCart} />
                         )}
                     </div>
                 </section>

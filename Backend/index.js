@@ -1,10 +1,16 @@
 require('dotenv').config();
 
+const corsOrigin = process.env.corsOrigin;
+const port = process.env.PORT;
+const imageURL = process.env.imageURL;
+const secret = process.env.secret;
+
 const express = require('express');
 const Product = require('./Model/Product');
 const bcrypt = require('bcryptjs');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
+const razorPay = require('razorpay');
 const staticMiddleware = require('./MiddleWares/staticMiddleWare');
 const ecommerceConnectMiddleWare = require('./MiddleWares/ecommerceConnectMiddleWare');
 const User = require('./Model/User');
@@ -13,14 +19,6 @@ const Cart = require('./Model/Cart');
 
 const server = express();
 
-
-// Access environment variables
-const corsOrigin = process.env.corsOrigin;
-const port = process.env.PORT;
-const imageURL = process.env.imageURL;
-const secret = process.env.secret;
-
-// Configure CORS
 server.use(cors({
     origin: corsOrigin, // Replace with the origin of your frontend
     credentials: true // Allow credentials (cookies, authorization headers)
@@ -117,6 +115,29 @@ server.post('/LoginPage', async (req, res) => {
     }
 });
 
+server.post('/orders', async (req, res) => {
+    const { amount, currency, receipt } = req.body;
+    const RazorPay = new razorPay({
+        key_id: process.env.razorPay_key,
+        key_secret: process.env.razorPay_secret
+    });
+
+    const options = {
+        amount,
+        currency,
+        receipt: receipt.slice(0, 40)
+    };
+
+    try {
+        const order = await RazorPay.orders.create(options);
+        res.json(order);
+    } catch (error) {
+        console.error('Error creating order:', error);
+        res.status(500).send(error);
+    }
+});
+
+
 // server.post('/googleLogin', async (req, res) => {
 //     try {
 //         const { token } = req.body;
@@ -193,6 +214,20 @@ server.get('/', async (req, res) => {
 });
 
 // Backend Logic
+server.post('/cart/remove', async (req, res) => {
+    const { userId, productId } = req.body;
+    try {
+        let cart = await Cart.findOne({ userID: userId });
+        const updatedCartItems = cart.cartItems.filter(item => item.productId !== productId);
+        cart.cartItems = updatedCartItems;
+        await cart.save();
+        res.json(200);
+    }
+    catch (error) {
+        res.json(error);
+    }
+});
+
 server.post('/cart/add', async (req, res) => {
     const { Name, userId, productId, quantity, price, imgUrl } = req.body;
     try {
@@ -229,10 +264,12 @@ server.get('/cart/:userId', async (req, res) => {
             cartsObject = cart.toObject();
             cartsObject = cartsObject.cartItems;
             let quantity = 0;
+            let cost = 0;
             cartsObject.map((item) => {
                 quantity += item.quantity;
+                cost += item.cost;
             })
-            res.status(200).json({ cartsObject, quantity });
+            res.status(200).json({ cartsObject, quantity, cost });
         } else {
             // If cart does not exist, return a 404 status with a message
             res.status(404).json({ message: 'Cart not found' });
@@ -242,6 +279,22 @@ server.get('/cart/:userId', async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
+
+server.post('/quantityChange', async (req, res) => {
+    const { newQuantity, productId, userID } = req.body;
+
+    try {
+        let cart = await Cart.findOne({ userID: userID });
+
+        const ProductIndex = cart.cartItems.findIndex(item => item.productId === productId);
+        cart.cartItems[ProductIndex].quantity = newQuantity;
+
+        await cart.save();
+        res.json(200);
+    } catch (error) {
+        res.json(error);
+    }
+})
 
 
 server.listen(port, () => {

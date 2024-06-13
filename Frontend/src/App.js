@@ -7,6 +7,8 @@ import DefaultProductPage from './Pages/DefaultProductPage.jsx';
 import ProductPage from './Pages/ProductPage.jsx';
 import Register from './Components/RegisterationPage.jsx';
 import LoginPage from './Components/LoginPage.jsx';
+import OrderDetails from './Pages/OrderDetails.jsx';
+import Checkout from './Components/Checkout.jsx';
 
 function App() {
 
@@ -19,6 +21,8 @@ function App() {
         <Route path="/LoginPage" element={<LoginPage />} />
         <Route path="/:category" element={<DefaultProductPage />} />
         <Route path="/:category/:ID" element={<ProductPage />} />
+        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/OrderDetails" element={<OrderDetails />} />
       </Routes>
     </>
   );

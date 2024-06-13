@@ -50,3 +50,28 @@ img:hover{
 .shadow{
   box-shadow: 0 0 20px rgba(239, 176, 33, 0.5); /* Use the rgba() color corresponding to bg-orange-300 */
 }
+
+@keyframes draw {
+  0% {
+    stroke-dasharray: 0, 24;
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dasharray: 24, 0;
+    stroke-dashoffset: 0;
+  }
+}
+
+.tick {
+  width: 50px;
+  height: 50px;
+  display: inline-block;
+  stroke-width: 2;
+  stroke: #db7d12; /* Adjust color as needed */
+  fill: none;
+  margin-top: 10px;
+  animation: draw 1s ease-in-out forwards;
+}
+
+
+

@@ -9,8 +9,13 @@ export const CartProvider = ({ children }) => {
     const [itemsAdded, setItemsAdded] = useState(false);
     const [itemsRemoved, setItemsRemoved] = useState(false);
     const [cartItems, setCartItems] = useState([]);
-    const [quantity, setQuantity] = useState(1);
-    const [cost, setCost] = useState(1);
+    const [quantity, setQuantity] = useState(0);
+
+    const calculateTotalCost = () => {
+        return cartItems.reduce((total, item) => {
+            return total + item.quantity * item.price;
+        }, 0);
+    };
 
     useEffect(() => {
         setItemsAdded(false);
@@ -23,17 +28,16 @@ export const CartProvider = ({ children }) => {
                 const response = await axios.get(`http://localhost:8080/cart/${userID}`);
                 setCartItems(response.data.cartsObject);
                 setQuantity(response.data.quantity);
-                setCost(response.data.price * quantity);
             }
             catch (e) {
                 console.log(e);
             }
         }
         fetchCart();
-    }, [userID, quantity, itemsAdded, itemsRemoved]);
+    }, [userID, quantity, itemsAdded, itemsRemoved, cartItems]);
 
     return (
-        <cartContext.Provider value={{ itemsAdded, setItemsAdded, itemsRemoved, setItemsRemoved, cartItems, setCartItems, quantity, setQuantity, cost, setCost }}>
+        <cartContext.Provider value={{ itemsAdded, setItemsAdded, itemsRemoved,setItemsRemoved, calculateTotalCost, cartItems, setCartItems, quantity, setQuantity}}>
             {children}
         </cartContext.Provider>
     );

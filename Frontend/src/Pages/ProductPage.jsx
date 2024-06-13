@@ -42,12 +42,12 @@ function ProductPage() {
                     price: product.price,
                     imgUrl: product.imageURL
                 });
-                console.log(response.data);
                 if (response.status === 200) {
                     setItemsAdded(true);
                     const timer = setTimeout(() => {
                         setItemsAdded(false);
                     }, 10);
+                    setMessage("Item added successfully!!")
                     return () => clearTimeout(timer);
                 } else {
                     console.error('Error adding to cart:', response.data);
@@ -69,22 +69,6 @@ function ProductPage() {
     useEffect(() => {
         setItemsAdded(false);
     }, [])
-
-
-
-    // const handleRemoveFromCart = async (productId) => {
-    //     try {
-    //         const response = await axios.delete('http://localhost:8080/api/cart/remove', {
-    //             data: {
-    //                 userId: 1, // replace with actual user ID
-    //                 productId: productId
-    //             }
-    //         });
-    //         console.log('Item removed from cart:', response.data);
-    //     } catch (error) {
-    //         console.error('Error removing from cart:', error);
-    //     }
-    // };
 
     useEffect(() => {
         async function fetchProducts() {
@@ -117,6 +101,7 @@ function ProductPage() {
 
     useEffect(() => {
         scrollToTop();
+        setQuantity(1);
     }, [ID]);
 
     const handleMouseEnter = () => {

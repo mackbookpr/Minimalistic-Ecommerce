@@ -5,6 +5,9 @@
     "crypto": "^1.0.1",
     "node-cron": "^3.0.3",
     "prop-types": "^15.8.1",
-    "react-avatar": "^5.0.3"
+    "razorpay": "^2.9.4",
+    "react-avatar": "^5.0.3",
+    "react-transition-group": "^4.4.5",
+    "stripe": "^15.10.0"
   }
 }
