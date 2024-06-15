@@ -1,10 +1,9 @@
 require('dotenv').config();
 
 const corsOrigin = process.env.corsOrigin;
-const port = process.env.PORT;
+const port = process.env.PORT || 8080;
 const imageURL = process.env.imageURL;
 const secret = process.env.secret;
-
 const express = require('express');
 const Product = require('./Model/Product');
 const bcrypt = require('bcryptjs');
@@ -16,20 +15,19 @@ const ecommerceConnectMiddleWare = require('./MiddleWares/ecommerceConnectMiddle
 const User = require('./Model/User');
 const jwt = require('jsonwebtoken');
 const Cart = require('./Model/Cart');
+const path = require('path');
 
 const server = express();
-
-server.use(cors({
-    origin: corsOrigin, // Replace with the origin of your frontend
-    credentials: true // Allow credentials (cookies, authorization headers)
-}));
-
-
 
 server.use('/Public', staticMiddleware);
 server.use(ecommerceConnectMiddleWare);
 server.use(express.json());
 server.use(cookieParser());
+
+server.use(cors({
+    origin: corsOrigin,
+    credentials: true
+}));
 
 server.get('/api/products', async (req, res) => {
     try {
@@ -173,7 +171,7 @@ server.post('/logout', (req, res) => {
     res.status(200).send({ message: 'Logout successful' });
 });
 
-server.get('/', async (req, res) => {
+server.get('/valid', async (req, res) => {
     try {
         // Get the token from the request cookies
         const token = req.cookies.token;
@@ -295,6 +293,10 @@ server.post('/quantityChange', async (req, res) => {
         res.json(error);
     }
 })
+
+if(process.env.NODE_ENV === 'production'){
+    server.use(express.static('client/build'))
+}
 
 
 server.listen(port, () => {
