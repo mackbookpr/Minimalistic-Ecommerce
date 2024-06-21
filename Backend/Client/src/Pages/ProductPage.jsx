@@ -94,13 +94,8 @@ function ProductPage() {
 
     const [Background, setBackground] = useState('');
 
-
-    function scrollToTop() {
-        window.scrollTo(0, 0);
-    }
-
     useEffect(() => {
-        scrollToTop();
+        window.scrollTo(0, 0);
         setQuantity(1);
     }, [ID]);
 
@@ -116,17 +111,17 @@ function ProductPage() {
     const containerClass = isLargeScreen ? 'flex flex-row' : 'flex flex-col';
 
     return (
-        <div className='xl:max-w-[1245px] lg:max-w-[1025px] h-[500px] md:max-w-[750px] m-auto gap-10 flex-col px-10'>
+        <div className='xl:w-[1870px] w-[95vw] rounded-xl h-[500px] m-auto gap-10 flex-col px-2'>
             <Categories />
             {
                 products.map((product) => (
                     <div key={product.id} className='pt-[8rem]'>
-                        <h1 className='absolute lg:text-5xl md:text-2xl font-bold flex left-1/2 justify-center -translate-x-1/2 z-10 '>{product.name}</h1>
+                        <h1 className='absolute lg:text-5xl md:text-2xl text-sm font-bold flex left-1/2 justify-center -translate-x-1/2 z-10 '>{product.name}</h1>
                         <div className={`${containerClass} gap-5`}>
-                            <div className="lg:w-1/2 w-full mt-16 lg:mb-8 mb-2 relative md:h-[550px] lg:h-[380px] h-[400px]">
+                            <div className="lg:w-1/2 w-full mt-16 lg:mb-8 mb-2 relative md:h-[550px] lg:h-[580px] h-[400px]">
                                 <img src={product.imageURL} alt="" className='w-full h-full object-cover border-2 border-black' />
                             </div>
-                            <div className="lg:w-1/2 w-full bg-orange-200 lg:py-40 py-10 h-auto px-2 flex text-lg flex-col gap-10 border border-black lg:h-[440px] justify-center">
+                            <div className="lg:w-1/2 w-full bg-orange-200 lg:py-40 py-10 h-auto px-2 flex md:text-2xl flex-col gap-10 border border-black lg:h-[640px] justify-center">
                                 <p className='sm:text-left text-center'>{product.description}</p>
 
                                 <div className="flex justify-between items-center sm:flex-row flex-col gap-2">
@@ -142,16 +137,10 @@ function ProductPage() {
                                 <div className="flex justify-between">
                                     <button className='xl:py-2 xl:px-20 lg:px-12 lg:py-1 border py-2 px-3 border-black' onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} style={{ background: Background }} onClick={() => handleAddToCart(product)}>Add to Cart</button>
                                     <button className='xl:py-2 xl:px-20 lg:px-12 lg:py-1 px-3 py-2 border border-black bg-orange-400'>Buy Now</button>
-                                    <div>{product.weight}</div>
                                 </div>
                             </div>
                         </div>
 
-                        <div className="flex gap-5 mt-5 md:flex-nowrap flex-wrap justify-center">
-                            <p className="sm:w-1/3 w-full bg-orange-300 h-[80px] flex items-center justify-center md:text-lg text-sm font-semibold">Weight:{product.weight}</p>
-                            <p className="sm:w-1/3 w-full  bg-orange-300 h-[80px] flex items-center justify-center md:text-lg text-sm font-semibold">Texture:{product.texture}</p>
-                            <p className="sm:w-1/3 w-full bg-orange-300 h-[80px] flex items-center justify-center md:text-lg text-sm font-semibold">Size:{product.size}</p>
-                        </div>
                         <Trending />
                         <Newsletter />
                         <Footer />

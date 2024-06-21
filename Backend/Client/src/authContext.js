@@ -6,7 +6,7 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
     const [userID, setUserID] = useState(null);
     const [username, setUserName] = useState(null);
-
+    const [url, setUrl] = useState('');
     useEffect(() => {
         const fetchID = async () => {
             try {
@@ -29,7 +29,7 @@ export const AuthProvider = ({ children }) => {
     }, []);
 
     return (
-        <AuthContext.Provider value={{ userID, username, setUserID, setUserName }}>
+        <AuthContext.Provider value={{ userID, username, setUserID, setUserName ,url, setUrl}}>
             {children}
         </AuthContext.Provider>
     );

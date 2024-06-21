@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useCart } from '../CartContext';
 import { useAuth } from '../authContext';
 import axios from 'axios';
-import AddressForm from '../AddressForm'; // Import your AddressForm component
+import AddressForm from './AddressForm'; // Import your AddressForm component
 import { FaRegTrashCan } from "react-icons/fa6";
 import { useNavigate } from 'react-router-dom';
 
@@ -21,7 +21,7 @@ function Checkout() {
 
         try {
             const { data } = await axios.post(orderUrl, {
-                amount: totalAmount,
+                amount: totalAmount * 100,
                 currency: 'INR',
                 receipt: receiptId
             });
@@ -34,7 +34,7 @@ function Checkout() {
                 description: 'Test Transaction',
                 image: 'https://example.com/your_logo',
                 order_id: data.id,
-                handler: function (response) {
+                handler: async function (response) {
                     setToastMessage(`Payment successfull!!`);
                     setToastVisible(true);
 
@@ -42,6 +42,16 @@ function Checkout() {
                         setToastVisible(false);
                     }, 2000);
 
+                    try {
+                        // Call the backend to send the invoice email
+                        await axios.post('http://localhost:8080/send-invoice', {
+                            email: 'maheshwarimadhav166@gmail.com',
+                            receiptId: receiptId,
+                            totalAmount: totalAmount
+                        });
+                    } catch (error) {
+                        console.error('Error sending invoice email:', error);
+                    }
                     navigate('/orders');
 
                 },

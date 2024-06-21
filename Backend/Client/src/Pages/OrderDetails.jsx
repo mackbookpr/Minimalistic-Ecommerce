@@ -18,11 +18,11 @@ function OrderDetails() {
 
       </div>
       <h1 className='font-bold text-2xl mt-4'>Subtotal: &#x20B9;{calculateTotalCost()}</h1>
-      <div className="w-full mt-10 flex flex-wrap gap-5">
+      <div className="w-full mt-10 grid grid-cols-5 gap-5 ">
         {
           cartItems.map(item => (
             <div id={item.key} className='flex gap-5' key={item.key}>
-              <img src={item.imgUrl} className="h-[190px] w-[190px] object-cover" alt="" />
+              <img src={item.imgUrl} className="h-[190px] w-[190px] object-cover rounded-xl" alt="" />
               <div className="flex flex-col items-start gap-2 text-sm">
                 <div className="flex justify-between w-full">
                   <h1>{item.Name}</h1>

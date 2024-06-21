@@ -59,7 +59,7 @@ function Cart({ shoppingCart, setShoppingCart }) {
     };
 
     return (
-        <div className="right-0 text-black absolute w-auto top-0 h-[100vh] bg-orange-50 px-5 flex flex-col justify-between z-20 xl:max-w-[1265px] lg:max-w-[1035px] md:max-w-[830px]" style={{ width: shoppingCart ? 'auto' : 0, transition: 'width 5s' }}>
+        <div className="-right-7 text-black absolute w-auto top-0 h-[100vh] bg-orange-50 px-5 flex flex-col justify-between z-20 xl:max-w-[1265px] lg:max-w-[1035px] md:max-w-[830px]" style={{ width: shoppingCart ? 'auto' : 0, transition: 'width 5s' }}>
             <div className="flex py-5 gap-2">
                 <button className="text-xl" onClick={toggleShoppingCart}><RxCross1 /></button>
                 <h1 className='font-bold text-xl'>Subtotal: &#x20B9;{calculateTotalCost()}</h1>

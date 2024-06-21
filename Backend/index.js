@@ -4,6 +4,8 @@ const corsOrigin = process.env.corsOrigin;
 const port = process.env.PORT || 8080;
 const imageURL = process.env.imageURL;
 const secret = process.env.secret;
+const Email = process.env.email;
+const Pass = process.env.pass;
 const express = require('express');
 const Product = require('./Model/Product');
 const bcrypt = require('bcryptjs');
@@ -16,6 +18,7 @@ const User = require('./Model/User');
 const jwt = require('jsonwebtoken');
 const Cart = require('./Model/Cart');
 const path = require('path');
+const nodemailer = require('nodemailer');
 
 const server = express();
 
@@ -28,6 +31,10 @@ server.use(cors({
     origin: corsOrigin,
     credentials: true
 }));
+server.use((req, res, next) => {
+    res.setHeader('Cross-Origin-Opener-Policy', 'same-origin-allow-popups');
+    next();
+  });
 
 server.get('/api/products', async (req, res) => {
     try {
@@ -48,6 +55,20 @@ server.get('/api/products', async (req, res) => {
         res.status(500).json({ error: "Error fetching products" });
     }
 });
+
+server.get('/defaultImages', (req, res) => {
+    try {
+        const images = [
+            { src: "http://localhost:8080/Public/SkinCare.jpg", text: "Revive skin" },
+            { src: "http://localhost:8080/Public/Kitchen.jpg", text: "Refine food" },
+            { src: "http://localhost:8080/Public/Electronics.jpg", text: "New Home" },
+            { src: "http://localhost:8080/Public/Furniture.jpg", text: "Live Well" },
+        ];
+        res.json(images);
+    } catch (error) {
+        console.log(error);
+    }
+})
 
 server.post('/Register', async (req, res) => {
     try {
@@ -135,36 +156,35 @@ server.post('/orders', async (req, res) => {
     }
 });
 
+server.post('/send-invoice', async (req, res) => {
+    const { email, receiptId, totalAmount } = req.body;
+    // Configure your email transport
+    let transporter = nodemailer.createTransport({
+        service: 'Gmail', // You can use any email servicemaheshwarimadhav166@12345Mdhav166imaheshwa
+        auth: {
+            user: Email,
+            pass: Pass,
+        },
+    });
 
-// server.post('/googleLogin', async (req, res) => {
-//     try {
-//         const { token } = req.body;
+    // Configure the email options
+    let mailOptions = {
+        from: `"Minimalistic Ecommerce" ${Email}`,
+        to: email,
+        subject: 'Your Invoice',
+        text: `Thank you for your purchase. Here is your receipt:\n\nReceipt ID: ${receiptId}\nTotal Amount: ₹${totalAmount}`,
+        html: `<p>Thank you for your purchase. Here is your receipt:</p><p><b>Receipt ID:</b> ${receiptId}</p><p><b>Total Amount:</b> ₹${totalAmount}</p>`
+    };
 
-//         // Verify the Google OAuth token
-//         const response = await axios.get(`https://oauth2.googleapis.com/tokeninfo?id_token=${token}`);
-//         const { aud, email, name } = response.data;
-
-//         // Check if the token audience matches your Google OAuth client ID
-//         if (aud !== 'YOUR_GOOGLE_OAUTH_CLIENT_ID') {
-//             return res.status(401).json({ error: 'Invalid token audience' });
-//         }
-
-//         // Extract user information
-//         const userInfo = { email, name };
-
-//         // Generate JWT token
-//         const accessToken = jwt.sign(userInfo, 'your-secret-key', { expiresIn: '1h' });
-
-//         // Set the JWT token as a cookie
-//         res.cookie('accessToken', accessToken, { httpOnly: true });
-
-//         // Send JWT token to the client
-//         res.json({ accessToken });
-//     } catch (error) {
-//         console.error('Google login error:', error);
-//         res.status(500).json({ error: 'Internal server error' });
-//     }
-// });
+    // Send the email
+    try {
+        await transporter.sendMail(mailOptions);
+        res.status(200).send('Invoice sent successfully');
+    } catch (error) {
+        console.error('Error sending email:', error);
+        res.status(500).send('Error sending email');
+    }
+});
 
 server.post('/logout', (req, res) => {
     res.clearCookie('token');
@@ -211,7 +231,6 @@ server.get('/valid', async (req, res) => {
     }
 });
 
-// Backend Logic
 server.post('/cart/remove', async (req, res) => {
     const { userId, productId } = req.body;
     try {
@@ -293,10 +312,6 @@ server.post('/quantityChange', async (req, res) => {
         res.json(error);
     }
 })
-
-if(process.env.NODE_ENV === 'production'){
-    server.use(express.static('client/build'))
-}
 
 
 server.listen(port, () => {

@@ -7,9 +7,11 @@ import { useAuth } from '../authContext';
 import { useCart } from '../CartContext';
 import axios from 'axios';
 import Cart from './Cart';
+import { useLoading } from '../LoadingContext';
 
 const Navbar = () => {
-    const { userID, username, setUserID, setUserName } = useAuth();
+    const { userID, username, setUserID, setUserName, url } = useAuth();
+    const { isLoading } = useLoading();
     const { setItemsRemoved, cartItems, setItemsAdded, quantity, setQuantity, calculateTotalCost } = useCart();
     const location = useLocation();
 
@@ -71,9 +73,6 @@ const Navbar = () => {
         }
     };
 
-
-
-
     const handleInputChange = (e) => {
         const inputValue = e.target.value;
         setSearchInput(inputValue);
@@ -91,16 +90,16 @@ const Navbar = () => {
         setFilteredItems(filteredItems);
     };
 
-    const pathNames = ['/Register', '/LoginPage', '/checkout', '/orders'];
+    const pathNames = ['/Register', '/LoginPage', '/checkout', '/orders', 'ErrorPage'];
 
     return (
-        (!pathNames.includes(location.pathname)) ? (
+        ((!pathNames.includes(location.pathname)) && (isLoading === false)) ? (
             <section className='fixed top-0 w-full bg-white z-50'>
-                <section className='xl:max-w-[1265px] lg:max-w-[1035px] md:max-w-[830px] m-auto shadow-lg py-3 flex items-center justify-between h-[70px] gap-10 px-12 bg-white relative'>
-                    <h1 className={`text-lg text-orange-400 font-bold md:text-2xl`}><Link to="/">Minimalistic Ecommerce</Link></h1>
+                <section className='rounded-xl xl:w-[1850px] w-[95vw] m-auto shadow-lg py-3 flex items-center justify-between h-[70px] gap-10 bg-white relative px-5'>
+                    <h1 className={`sm:text-lg text-[15px] text-orange-400 font-bold md:text-2xl`}><Link to="/">Minimalistic Ecommerce</Link></h1>
                     <div className='flex gap-24 justify-between text-orange-400 items-center'>
                         <div className={`flex items-center justify-end gap-2 md:gap-5`}>
-                            <div className={`text-md gap-3 items-center bg-orange-200 sm:py-1 py-0 md:px-2 px-2 w-[17em] relative hidden sm:flex`}>
+                            <div className={`text-md gap-3 items-center bg-orange-200 sm:py-1 py-0 md:px-2 px-2 w-[17em] relative hidden lg:flex`}>
                                 <button><FaSearch color='black' className='text-md' /></button>
                                 <input type="search" name="Search" value={searchInput} onChange={handleInputChange} placeholder={'Search for ' + (typedText + '|')} autoComplete='off' className={`Input bg-orange-200 focus:outline-none w-full`} />
                                 {searchInput && (
@@ -114,15 +113,15 @@ const Navbar = () => {
                             {userID && <h1>Hello {username}</h1>}
                             {userID && (
                                 <button>
-                                    <Avatar name={`${username}`} round="50px" size="40px" />
+                                    {url !== '' ? <img src={url} alt="" /> : <Avatar name={`${username}`} round="50px" size="40px" />}
                                 </button>
                             )}
-                            {!userID && <Link to="/Register" className='py-1 px-1.5 bg-orange-300 text-white rounded-md'>Register</Link>}
-                            {!userID && <Link to="/LoginPage" className='py-1 px-1.5 bg-orange-300 text-white rounded-md'>Login</Link>}
-                            {userID && <button className='py-1 px-1.5 bg-orange-300 text-white rounded-md' onClick={handleLogOut}>Log Out</button>}
+                            {!userID && <Link to="/Register" className='md:py-1 md:px-1.5 py-0.5 px-0.5 md:text-[16px] text-[10px]  bg-orange-300 text-white rounded-md'>Register</Link>}
+                            {!userID && <Link to="/LoginPage" className='md:py-1 md:px-1.5 py-0.5 px-0.5 md:text-[16px] text-[10px] bg-orange-300 text-white rounded-md'>Login</Link>}
+                            {userID && <button className='py-1 px-1.5 md:text-[16px] text-[14px] bg-orange-300 text-white rounded-md' onClick={handleLogOut}>Log Out</button>}
                             <div className='relative'>
                                 <button><CiShoppingCart size={32} color='orange' onClick={toggleShoppingCart} /></button>
-                                {userID && <h1 className='absolute -right-5 -top-3'>{quantity}</h1>}
+                                {userID && <h1 className='absolute -right-4 -top-2'>{quantity}</h1>}
                             </div>
                         </div>
 
