@@ -26,9 +26,9 @@ function SignInwithGoogle() {
       setUrl(result.photoURL);
 
       const isRegistered = await registerUser();
-      // if (isRegistered) {
-      //   await validateUser();
-      // }
+      if (isRegistered) {
+        await validateUser();
+      }
     } catch (error) {
       handleError(error);
     }

@@ -113,7 +113,7 @@ const Navbar = () => {
                             {userID && <h1>Hello {username}</h1>}
                             {userID && (
                                 <button>
-                                    {url !== '' ? <img src={url} alt="" /> : <Avatar name={`${username}`} round="50px" size="40px" />}
+                                    {/* {url !== '' ? <img src={url} alt="" /> : <Avatar name={`${username}`} round="50px" size="40px" />} */}
                                 </button>
                             )}
                             {!userID && <Link to="/Register" className='md:py-1 md:px-1.5 py-0.5 px-0.5 md:text-[16px] text-[10px]  bg-orange-300 text-white rounded-md'>Register</Link>}
