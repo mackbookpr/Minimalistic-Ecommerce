@@ -13,6 +13,7 @@ export const LoadingProvider = ({ children }) => {
             try {
                 const defaultImagesResponse = await axios.get('https://minimalistic-ecommerce.onrender.com/defaultImages');
                 const trendingProductsResponse = await axios.get('https://minimalistic-ecommerce.onrender.com/api/products');
+                console.log(defaultImagesResponse.data);
                 setDefaultImages(defaultImagesResponse.data);
                 setTrendingProducts(trendingProductsResponse.data);
                 setIsLoading(false);
