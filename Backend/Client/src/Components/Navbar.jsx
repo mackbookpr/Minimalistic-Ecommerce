@@ -65,7 +65,7 @@ const Navbar = () => {
 
     const handleLogOut = async () => {
         try {
-            await axios.post('http://localhost:8080/logout', {}, { withCredentials: true });
+            await axios.post('https://minimalistic-ecommerce.onrender.com/logout', {}, { withCredentials: true });
             setUserName(null);
             setUserID(null);
         } catch (error) {

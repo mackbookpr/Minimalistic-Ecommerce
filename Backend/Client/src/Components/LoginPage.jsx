@@ -32,7 +32,7 @@ const LoginPage = () => {
     else if (status === 200) {
       async function fetchID() {
         try {
-          const response = await axios.get('http://localhost:8080/valid', {
+          const response = await axios.get('https://minimalistic-ecommerce.onrender.com/valid', {
             withCredentials: true
           });
           if (response.data.valid && response.data.id) {
@@ -54,7 +54,7 @@ const LoginPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8080/LoginPage', formData, {
+      const response = await axios.post('https://minimalistic-ecommerce.onrender.com/LoginPage', formData, {
         withCredentials: true
       });
       setStatus(response.status);

@@ -16,7 +16,7 @@ function Checkout() {
     const [toastMessage, setToastMessage] = useState(''); // State for toast message
 
     const handlePayment = async () => {
-        const orderUrl = 'http://localhost:8080/orders';
+        const orderUrl = 'https://minimalistic-ecommerce.onrender.com/orders';
         const receiptId = `receipt_${userID}_${new Date().getTime()}`; // Dynamically generated receipt ID
 
         try {
@@ -44,7 +44,7 @@ function Checkout() {
 
                     try {
                         // Call the backend to send the invoice email
-                        await axios.post('http://localhost:8080/send-invoice', {
+                        await axios.post('https://minimalistic-ecommerce.onrender.com/send-invoice', {
                             email: 'maheshwarimadhav166@gmail.com',
                             receiptId: receiptId,
                             totalAmount: totalAmount
@@ -94,7 +94,7 @@ function Checkout() {
         }
 
         try {
-            const response = await axios.post('http://localhost:8080/quantityChange', {
+            const response = await axios.post('https://minimalistic-ecommerce.onrender.com/quantityChange', {
                 newQuantity,
                 productId,
                 userID
@@ -112,7 +112,7 @@ function Checkout() {
 
     const handleCartItemRemoval = async (id) => {
         try {
-            const removal = await axios.post('http://localhost:8080/cart/remove', {
+            const removal = await axios.post('https://minimalistic-ecommerce.onrender.com/cart/remove', {
                 userId: userID,
                 productId: id
             });

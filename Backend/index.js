@@ -60,10 +60,10 @@ server.get('/api/products', async (req, res) => {
 server.get('/defaultImages', (req, res) => {
     try {
         const images = [
-            { src: "http://localhost:8080/Public/SkinCare.jpg", text: "Revive skin" },
-            { src: "http://localhost:8080/Public/Kitchen.jpg", text: "Refine food" },
-            { src: "http://localhost:8080/Public/Electronics.jpg", text: "New Home" },
-            { src: "http://localhost:8080/Public/Furniture.jpg", text: "Live Well" },
+            { src: "https://minimalistic-ecommerce.onrender.com/Public/SkinCare.jpg", text: "Revive skin" },
+            { src: "https://minimalistic-ecommerce.onrender.com/Public/Kitchen.jpg", text: "Refine food" },
+            { src: "https://minimalistic-ecommerce.onrender.com/Public/Electronics.jpg", text: "New Home" },
+            { src: "https://minimalistic-ecommerce.onrender.com/Public/Furniture.jpg", text: "Live Well" },
         ];
         res.json(images);
     } catch (error) {

@@ -34,7 +34,7 @@ function ProductPage() {
     const handleAddToCart = async (product) => {
         if (userID) {
             try {
-                const response = await axios.post('http://localhost:8080/cart/add', {
+                const response = await axios.post('https://minimalistic-ecommerce.onrender.com/cart/add', {
                     Name: product.name,
                     userId: userID,
                     productId: product.id,
@@ -73,7 +73,7 @@ function ProductPage() {
     useEffect(() => {
         async function fetchProducts() {
             try {
-                const response = await axios.get('http://localhost:8080/api/products');
+                const response = await axios.get('https://minimalistic-ecommerce.onrender.com/api/products');
                 setProducts(response.data.filter(product => product.id.toString() === ID));
                 setPrice(price);
             } catch (error) {

@@ -10,7 +10,7 @@ export const AuthProvider = ({ children }) => {
     useEffect(() => {
         const fetchID = async () => {
             try {
-                const response = await axios.get('http://localhost:8080/valid', {
+                const response = await axios.get('https://minimalistic-ecommerce.onrender.com/valid', {
                     withCredentials: true
                 });
                 if (response.data.valid && response.data.id) {

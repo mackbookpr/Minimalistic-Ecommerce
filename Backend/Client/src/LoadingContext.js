@@ -26,8 +26,8 @@ export const LoadingProvider = ({ children }) => {
         const fetchData = async () => {
             try {
                 const [defaultImagesResponse, trendingProductsResponse] = await Promise.all([
-                    axios.get('http://localhost:8080/defaultImages'),
-                    axios.get('http://localhost:8080/api/products'),
+                    axios.get('https://minimalistic-ecommerce.onrender.com/defaultImages'),
+                    axios.get('https://minimalistic-ecommerce.onrender.com/api/products'),
                 ]);
                 const defaultImagesData = defaultImagesResponse.data;
                 const trendingProductsData = trendingProductsResponse.data;

@@ -38,7 +38,7 @@ export const CartProvider = ({ children }) => {
                 if (!userID) {
                     return;
                 }
-                const response = await axios.get(`http://localhost:8080/cart/${userID}`);
+                const response = await axios.get(`https://minimalistic-ecommerce.onrender.com/cart/${userID}`);
                 setCartItems(response.data.cartsObject);
                 setQuantity(response.data.quantity);
             } catch (e) {

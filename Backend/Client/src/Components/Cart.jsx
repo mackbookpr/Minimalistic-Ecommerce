@@ -19,7 +19,7 @@ function Cart({ shoppingCart, setShoppingCart }) {
         else {
             newQuantity = (Quantity >= 2 ? Quantity - 1 : Quantity);
         }
-        const response = await axios.post('http://localhost:8080/quantityChange', {
+        const response = await axios.post('https://minimalistic-ecommerce.onrender.com/quantityChange', {
             newQuantity, productId, userID
         });
         if (response.status === 200 && action === 'increase') {
@@ -32,7 +32,7 @@ function Cart({ shoppingCart, setShoppingCart }) {
 
     const handleCartItemRemoval = async (id) => {
         try {
-            const removal = await axios.post('http://localhost:8080/cart/remove', {
+            const removal = await axios.post('https://minimalistic-ecommerce.onrender.com/cart/remove', {
                 userId: userID,
                 productId: id
             });

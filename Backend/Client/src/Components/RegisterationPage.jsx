@@ -40,7 +40,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8080/Register', formData, {
+      const response = await axios.post('https://minimalistic-ecommerce.onrender.com/Register', formData, {
         withCredentials: true
       });
       setStatus(response.status);

@@ -37,7 +37,7 @@ function DefaultProductPage() {
     useEffect(() => {
         async function fetchProducts() {
             try {
-                const response = await axios.get('http://localhost:8080/api/products');
+                const response = await axios.get('https://minimalistic-ecommerce.onrender.com/api/products');
                 const products = response.data.filter(product => product.category.toLowerCase() === category.toLowerCase());
                 setProducts(products);
                 setFilteredProducts(products); // Initialize filteredProducts with all products
