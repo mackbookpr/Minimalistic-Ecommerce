@@ -1,4 +1,3 @@
-// src/Components/Trending.jsx
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useLoading } from '../LoadingContext';
@@ -8,7 +7,7 @@ function Trending() {
 
     return (
         <div>
-            <h1 className='text-xl mt-14 mb-10 font-semibold'>Trending Now</h1>
+            <h1 className='text-2xl mt-14 mb-10 font-semibold'>Trending Now</h1>
             <div className="grid lg:grid-cols-4 xl:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 gap-2 mt-5">
                 {trendingProducts.map(product => (
                     <Link key={product.id} to={`/${product.category}/${product.id}`}>

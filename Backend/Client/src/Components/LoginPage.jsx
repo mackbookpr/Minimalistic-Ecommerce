@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { GoogleLogin } from '@react-oauth/google';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useAuth } from '../authContext';
@@ -72,7 +71,7 @@ const LoginPage = () => {
     <div className="flex justify-center items-center h-screen bg-orange-100 relative">
       <div className="xl:w-[50vw] mx-4 md:mx-auto p-6 rounded-lg bg-white border-2 border-black">
         <h2 className="text-4xl font-bold text-center mb-8">Log In</h2>
-        <form onSubmit={handleSubmit} className='my-16'>
+        <form onSubmit={handleSubmit} className='my-8'>
           <input className="w-full px-4 py-2 mb-4 rounded-md border-2 border-gray-300 focus:outline-none focus:border-blue-500" type="email" name="email" placeholder="Email" onChange={handleChange} required />
           <input className="w-full px-4 py-2 mb-4 rounded-md border-2 border-gray-300 focus:outline-none focus:border-blue-500" type="text" name="username" placeholder="Username" onChange={handleChange} required />
           <div className="relative w-full mb-4">
@@ -85,7 +84,7 @@ const LoginPage = () => {
           <button className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline text-xl" type="submit">Log In</button>
         </form>
       </div>
-      <div className={`absolute py-2 sm:text-xl md:text-2xl text-[15px] md:px-5 px-1 ${(status === 0) ? '-top-32' : 'top-20'} transition-all duration-1000 bg-orange-300 rounded-md`}>{statusMessage}</div>
+      <div className={`absolute py-2 sm:text-xl md:text-2xl text-[15px] md:px-5 px-1 ${(status === 0) ? '-top-32 bg-white' : 'top-20 bg-orange-300'} transition-all duration-1000 bg-orange-300 rounded-md`}>{statusMessage}</div>
     </div>
   );
 };

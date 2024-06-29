@@ -44,7 +44,7 @@ const ImageSlider = ({ images }) => {
                         <img
                             src={image.src}
                             alt={`image-${index}`}
-                            className='sm:h-[37em] h-[25em] w-full object-cover z-10'
+                            className='sm:h-[37em] h-[25em] w-full object-cover z-10 rounded-xl'
                         />
                         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center md:gap-5 gap-1">
                             <p className='text-md md:text-3xl sm:text-md text-[12px] text-black font-semibold'>{image.text}</p>

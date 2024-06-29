@@ -115,7 +115,7 @@ function ProductPage() {
             <Categories />
             {
                 products.map((product) => (
-                    <div key={product.id} className='pt-[8rem]'>
+                    <div key={product.id} className='pt-[8rem] pb-2'>
                         <h1 className='absolute lg:text-5xl md:text-2xl text-sm font-bold flex left-1/2 justify-center -translate-x-1/2 z-10 '>{product.name}</h1>
                         <div className={`${containerClass} gap-5`}>
                             <div className="lg:w-1/2 w-full mt-16 lg:mb-8 mb-2 relative md:h-[550px] lg:h-[580px] h-[400px]">

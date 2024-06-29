@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import SignInWithGoogle from './SignInWithGoogle';
 
 const Register = () => {
   const [status, setStatus] = useState(0);
@@ -98,9 +97,8 @@ const Register = () => {
             Register
           </button>
         </form>
-        <SignInWithGoogle />
       </div>
-      <div className={`absolute py-2 sm:text-xl md:text-2xl text-[15px] md:px-5 px-1 ${(status === 0) ? '-top-32' : 'top-20'} transition-all duration-1000 bg-orange-300 rounded-md`}>
+      <div className={`absolute py-2 sm:text-xl md:text-2xl text-[15px] md:px-5 px-1 ${(status === 0) ? '-top-32 bg-white' : 'top-20 bg-orange-300'} transition-all duration-1000 rounded-md`}>
         {statusMessage}
       </div>
     </div>
