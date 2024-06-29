@@ -11,6 +11,8 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.6.8",
     "babel-plugin-macros": "^3.1.0",
+    "firebase": "^10.12.2",
+    "framer-motion": "^11.2.12",
     "fswatch": "^0.1.4",
     "npm": "^10.4.0",
     "react": "^18.2.0",
