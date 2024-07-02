@@ -34,10 +34,10 @@ server.use(cors({
     credentials: true
 }));
 
-server.use((req, res, next) => {
-    res.setHeader('Cross-Origin-Opener-Policy', 'same-origin-allow-popups');
-    next();
-  });
+// server.use((req, res, next) => {
+//     res.setHeader('Cross-Origin-Opener-Policy', 'same-origin-allow-popups');
+//     next();
+//   });
 
 server.get('/api/products', async (req, res) => {
     try {
