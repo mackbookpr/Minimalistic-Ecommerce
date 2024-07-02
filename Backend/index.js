@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-const corsOrigin = process.env.corsOrigin;
+const corsOrigin = process.env.corsOrigin || 'https://minimalisticecommercefrontend.onrender.com';
 const port = process.env.PORT || 8080;
 const imageURL = process.env.imageURL;
 const secret = process.env.secret;
