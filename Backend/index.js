@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-const corsOrigin = process.env.corsOrigin || 'https://minimalisticecommercefrontend.onrender.com';
+// const corsOrigin = process.env.corsOrigin || 'https://minimalisticecommercefrontend.onrender.com';
 const port = process.env.PORT || 8080;
 const imageURL = process.env.imageURL;
 const secret = process.env.secret;
@@ -29,10 +29,6 @@ server.use(ecommerceConnectMiddleWare);
 server.use(express.json());
 server.use(cookieParser());
 
-server.use(cors({
-    origin: corsOrigin,
-    credentials: true
-}));
 
 // server.use((req, res, next) => {
 //     res.setHeader('Cross-Origin-Opener-Policy', 'same-origin-allow-popups');
