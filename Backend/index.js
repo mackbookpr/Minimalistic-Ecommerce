@@ -6,6 +6,7 @@ const imageURL = process.env.imageURL;
 const secret = process.env.secret;
 const Email = process.env.email;
 const Pass = process.env.pass;
+
 const express = require('express');
 const Product = require('./Model/Product');
 const bcrypt = require('bcryptjs');
@@ -32,6 +33,7 @@ server.use(cors({
     origin: corsOrigin,
     credentials: true
 }));
+
 server.use((req, res, next) => {
     res.setHeader('Cross-Origin-Opener-Policy', 'same-origin-allow-popups');
     next();
